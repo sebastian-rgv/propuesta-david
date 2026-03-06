@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETS Perú — MVP</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;0,900;1,300;1,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0f1923;
+  --teal: #057a6f;
+  --teal-light: #0aa393;
+  --teal-pale: #e6f4f3;
+  --gold: #b5813a;
+  --gold-pale: #fdf4e7;
+  --red: #b83232;
+  --red-pale: #fdeaea;
+  --sand: #f5f0e8;
+  --white: #fdfcfa;
+  --border: #e2ddd6;
+  --muted: #7a7266;
+  --shadow: 0 2px 16px rgba(15,25,35,0.08);
+  --shadow-lg: 0 8px 40px rgba(15,25,35,0.14);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Instrument Sans', sans-serif;
+  background: var(--white);
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+/* ── TOPBAR ── */
+.topbar {
+  background: var(--ink);
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo-pill {
+  background: var(--teal);
+  color: white;
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: 13px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+.logo-name {
+  font-family: 'Fraunces', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+}
+
+.logo-name span { color: var(--teal-light); }
+
+.topnav {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.topnav a {
+  color: #8da0b0;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  transition: color 0.15s;
+}
+
+.topnav a:hover { color: white; }
+
+.nav-cta {
+  background: var(--teal) !important;
+  color: white !important;
+  padding: 7px 16px;
+  border-radius: 6px;
+  font-weight: 600 !important;
+}
+
+/* ── HERO SEARCH ── */
+.hero {
+  background: var(--ink);
+  padding: 56px 32px 72px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 600px 400px at 80% 50%, rgba(5,122,111,0.15) 0%, transparent 70%),
+    radial-gradient(ellipse 300px 300px at 10% 80%, rgba(181,129,58,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(5,122,111,0.2);
+  border: 1px solid rgba(10,163,147,0.4);
+  color: var(--teal-light);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-family: 'Fraunces', serif;
+  font-size: 52px;
+  font-weight: 900;
+  color: white;
+  line-height: 1.05;
+  margin-bottom: 16px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--teal-light);
+}
+
+.hero p {
+  color: #8da0b0;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 36px;
+}
+
+/* ── SEARCH BOX ── */
+.search-box {
+  background: white;
+  border-radius: 14px;
+  padding: 6px 6px 6px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 20px;
+}
+
+.search-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 15px;
+  color: var(--ink);
+  background: transparent;
+}
+
+.search-box input::placeholder { color: #b0a89e; }
+
+.search-btn {
+  background: var(--teal);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.search-btn:hover { background: var(--teal-light); }
+
+.search-chips {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.search-chip {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #8da0b0;
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.search-chip:hover {
+  background: rgba(5,122,111,0.25);
+  border-color: var(--teal);
+  color: var(--teal-light);
+}
+
+/* ── STATS STRIP ── */
+.stats-strip {
+  background: var(--sand);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 32px;
+  display: flex;
+  gap: 48px;
+  justify-content: center;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-num {
+  font-family: 'Fraunces', serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--teal);
+  display: block;
+  line-height: 1;
+}
+
+.stat-lbl {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+/* ── MAIN LAYOUT ── */
+.app-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  max-width: 1280px;
+  margin: 0 auto;
+  min-height: calc(100vh - 56px);
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  border-right: 1px solid var(--border);
+  padding: 32px 24px;
+  background: var(--white);
+  position: sticky;
+  top: 56px;
+  height: calc(100vh - 56px);
+  overflow-y: auto;
+}
+
+.sidebar-section {
+  margin-bottom: 32px;
+}
+
+.sidebar-title {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.filter-opt {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 0.12s;
+  font-size: 13px;
+  color: var(--ink);
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  font-family: 'Instrument Sans', sans-serif;
+}
+
+.filter-opt:hover { background: var(--sand); }
+.filter-opt.active { background: var(--teal-pale); color: var(--teal); font-weight: 600; }
+
+.filter-count {
+  font-size: 11px;
+  color: var(--muted);
+  background: var(--sand);
+  padding: 2px 7px;
+  border-radius: 10px;
+}
+
+.filter-opt.active .filter-count {
+  background: rgba(5,122,111,0.15);
+  color: var(--teal);
+}
+
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 4px 0 16px;
+}
+
+/* dictamen filters */
+.dictamen-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dict-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 7px;
+  border: 1.5px solid var(--border);
+  background: white;
+  cursor: pointer;
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  transition: all 0.12s;
+  width: 100%;
+  text-align: left;
+}
+
+.dict-btn:hover { border-color: currentColor; }
+
+.dict-btn.fav { color: var(--teal); }
+.dict-btn.fav.active { background: var(--teal-pale); border-color: var(--teal); }
+.dict-btn.nofav { color: var(--red); }
+.dict-btn.nofav.active { background: var(--red-pale); border-color: var(--red); }
+.dict-btn.cond { color: var(--gold); }
+.dict-btn.cond.active { background: var(--gold-pale); border-color: var(--gold); }
+
+.dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+/* ── MAIN CONTENT ── */
+.main {
+  padding: 32px 40px;
+}
+
+.results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.results-title {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.results-count {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.sort-select {
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 13px;
+  color: var(--ink);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 7px 12px;
+  background: white;
+  cursor: pointer;
+  outline: none;
+}
+
+/* ── ETS CARDS ── */
+.ets-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ets-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 24px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  cursor: pointer;
+  transition: all 0.18s;
+  position: relative;
+  overflow: hidden;
+}
+
+.ets-card::after {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: transparent;
+  transition: background 0.18s;
+}
+
+.ets-card:hover {
+  border-color: var(--teal);
+  box-shadow: var(--shadow);
+  transform: translateY(-1px);
+}
+
+.ets-card:hover::after { background: var(--teal); }
+.ets-card.active-card { border-color: var(--teal); box-shadow: var(--shadow); }
+.ets-card.active-card::after { background: var(--teal); }
+
+.card-left { display: flex; flex-direction: column; gap: 8px; }
+
+.card-drug {
+  font-family: 'Fraunces', serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.card-commercial {
+  font-size: 12px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.card-indication {
+  font-size: 13px;
+  color: #4a5568;
+  line-height: 1.5;
+}
+
+.card-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.tag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 9px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.tag-inst { background: #e8f0fe; color: #2557d6; }
+.tag-essalud { background: var(--teal-pale); color: var(--teal); }
+.tag-year { background: var(--sand); color: var(--muted); }
+.tag-cat { background: #f3e8ff; color: #7c3aed; }
+
+.card-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.dictamen-badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.dictamen-badge.fav { background: var(--teal-pale); color: var(--teal); }
+.dictamen-badge.nofav { background: var(--red-pale); color: var(--red); }
+.dictamen-badge.cond { background: var(--gold-pale); color: var(--gold); }
+
+.card-arrow {
+  font-size: 18px;
+  color: var(--border);
+  transition: color 0.15s;
+}
+
+.ets-card:hover .card-arrow { color: var(--teal); }
+
+/* ── DETAIL PANEL ── */
+.detail-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(15,25,35,0.5);
+  backdrop-filter: blur(2px);
+}
+
+.detail-overlay.open { display: flex; align-items: flex-start; justify-content: flex-end; }
+
+.detail-panel {
+  background: var(--white);
+  width: 600px;
+  height: 100vh;
+  overflow-y: auto;
+  box-shadow: -8px 0 48px rgba(15,25,35,0.2);
+  animation: slideIn 0.25s ease;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.detail-header {
+  background: var(--ink);
+  padding: 24px 28px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.detail-close {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.close-btn {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s;
+}
+
+.close-btn:hover { background: rgba(255,255,255,0.2); }
+
+.detail-drug-name {
+  font-family: 'Fraunces', serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: white;
+  margin-bottom: 4px;
+}
+
+.detail-commercial { color: #8da0b0; font-size: 14px; font-style: italic; }
+
+.detail-body { padding: 28px; }
+
+.detail-section {
+  margin-bottom: 28px;
+}
+
+.detail-section-title {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--muted);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detail-section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.info-item {
+  background: var(--sand);
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+.info-item label {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.info-item span {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.dictamen-box {
+  border-radius: 10px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.dictamen-box.fav { background: var(--teal-pale); border: 1.5px solid var(--teal); }
+.dictamen-box.nofav { background: var(--red-pale); border: 1.5px solid var(--red); }
+.dictamen-box.cond { background: var(--gold-pale); border: 1.5px solid var(--gold); }
+
+.dictamen-icon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.dictamen-text strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.dictamen-text span { font-size: 13px; color: var(--muted); }
+
+.pico-box {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.pico-row {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  border-bottom: 1px solid var(--border);
+}
+
+.pico-row:last-child { border-bottom: none; }
+
+.pico-label {
+  background: var(--sand);
+  padding: 12px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--teal);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+}
+
+.pico-value {
+  padding: 12px 14px;
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.summary-text {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #3a4a5c;
+  background: var(--sand);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.detail-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.btn-primary {
+  flex: 1;
+  background: var(--teal);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.15s;
+  text-decoration: none;
+}
+
+.btn-primary:hover { background: var(--teal-light); }
+
+.btn-secondary {
+  background: white;
+  color: var(--ink);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 18px;
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.15s;
+}
+
+.btn-secondary:hover { border-color: var(--ink); }
+
+/* ── CHAT BOX ── */
+.chat-section {
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+  margin-top: 8px;
+}
+
+.chat-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+
+.chat-badge {
+  background: var(--teal-pale);
+  color: var(--teal);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.msg {
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.5;
+  max-width: 90%;
+}
+
+.msg.user {
+  background: var(--ink);
+  color: white;
+  align-self: flex-end;
+  border-radius: 10px 10px 2px 10px;
+}
+
+.msg.ai {
+  background: var(--sand);
+  color: var(--ink);
+  align-self: flex-start;
+  border-radius: 10px 10px 10px 2px;
+}
+
+.chat-input-row {
+  display: flex;
+  gap: 8px;
+}
+
+.chat-input {
+  flex: 1;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 13px;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.chat-input:focus { border-color: var(--teal); }
+
+.chat-send {
+  background: var(--teal);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+.chat-send:hover { background: var(--teal-light); }
+
+/* ── EMPTY STATE ── */
+.empty-state {
+  text-align: center;
+  padding: 80px 40px;
+  color: var(--muted);
+}
+
+.empty-icon { font-size: 48px; margin-bottom: 16px; }
+.empty-state h3 { font-family: 'Fraunces', serif; font-size: 20px; color: var(--ink); margin-bottom: 8px; }
+
+/* ── PAGINATION ── */
+.pagination {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.page-btn {
+  width: 36px; height: 36px;
+  border-radius: 7px;
+  border: 1.5px solid var(--border);
+  background: white;
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.12s;
+}
+
+.page-btn:hover { border-color: var(--teal); color: var(--teal); }
+.page-btn.active { background: var(--teal); border-color: var(--teal); color: white; font-weight: 600; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink);
+  color: #8da0b0;
+  padding: 32px;
+  text-align: center;
+  font-size: 13px;
+  border-top: 3px solid var(--teal);
+}
+
+footer strong { color: white; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(16px); }
+  to { opacity:1; transform: translateY(0); }
+}
+
+.hero-inner > * {
+  animation: fadeUp 0.5s ease both;
+}
+.hero-inner > *:nth-child(1) { animation-delay: 0.05s; }
+.hero-inner > *:nth-child(2) { animation-delay: 0.12s; }
+.hero-inner > *:nth-child(3) { animation-delay: 0.19s; }
+.hero-inner > *:nth-child(4) { animation-delay: 0.26s; }
+.hero-inner > *:nth-child(5) { animation-delay: 0.33s; }
+
+.ets-card {
+  animation: fadeUp 0.4s ease both;
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a class="logo" href="#">
+    <div class="logo-pill">H&T</div>
+    <div class="logo-name">Health <span>& Tech</span></div>
+  </a>
+  <nav class="topnav">
+    <a href="#">Por Patología</a>
+    <a href="#">Por Institución</a>
+    <a href="#">Normativa</a>
+    <a href="#">¿Qué es una ETS?</a>
+    <a href="#" class="nav-cta">Health & Tech</a>
+  </nav>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-tag">🇵🇪 RENETSA · INS-SETS · IETSI</div>
+    <h1>Encuentra cualquier<br><em>dictamen ETS</em><br>al instante</h1>
+    <p>Base de datos completa de Evaluaciones de Tecnologías Sanitarias publicadas en Perú. 200+ dictámenes indexados y con búsqueda inteligente.</p>
+
+    <div class="search-box">
+      <span style="font-size:18px; color:#b0a89e;">🔍</span>
+      <input type="text" id="searchInput" placeholder="Buscar por medicamento, patología o indicación..." oninput="filterCards()">
+      <button class="search-btn" onclick="filterCards()">Buscar</button>
+    </div>
+
+    <div class="search-chips">
+      <div class="search-chip" onclick="setSearch('ibrutinib')">Ibrutinib</div>
+      <div class="search-chip" onclick="setSearch('cáncer')">Cáncer</div>
+      <div class="search-chip" onclick="setSearch('esclerosis')">Esclerosis múltiple</div>
+      <div class="search-chip" onclick="setSearch('favorable')">Solo favorables</div>
+      <div class="search-chip" onclick="setSearch('IETSI')">IETSI - EsSalud</div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stat-item">
+    <span class="stat-num">200+</span>
+    <span class="stat-lbl">ETS indexadas</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">2</span>
+    <span class="stat-lbl">Instituciones</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">18</span>
+    <span class="stat-lbl">Especialidades</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">2022–2025</span>
+    <span class="stat-lbl">Norma vigente</span>
+  </div>
+</div>
+
+<!-- APP LAYOUT -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Institución</div>
+      <div class="filter-group">
+        <button class="filter-opt active" onclick="setFilter('inst','todas',this)">
+          Todas <span class="filter-count">200</span>
+        </button>
+        <button class="filter-opt" onclick="setFilter('inst','IETSI',this)">
+          IETSI – EsSalud <span class="filter-count">124</span>
+        </button>
+        <button class="filter-opt" onclick="setFilter('inst','INS-SETS',this)">
+          INS-SETS – MINSA <span class="filter-count">76</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Dictamen</div>
+      <div class="dictamen-filter">
+        <button class="dict-btn fav" onclick="toggleDictamen('favorable',this)">
+          <span class="dot"></span> Favorable
+        </button>
+        <button class="dict-btn nofav" onclick="toggleDictamen('no favorable',this)">
+          <span class="dot"></span> No favorable
+        </button>
+        <button class="dict-btn cond" onclick="toggleDictamen('condicionado',this)">
+          <span class="dot"></span> Condicionado
+        </button>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Especialidad</div>
+      <div class="filter-group">
+        <button class="filter-opt" onclick="setFilter('cat','todas',this)">Todas</button>
+        <button class="filter-opt" onclick="setFilter('cat','Oncología',this)">🎗️ Oncología</button>
+        <button class="filter-opt" onclick="setFilter('cat','Enf. Raras',this)">🧬 Enf. Raras</button>
+        <button class="filter-opt" onclick="setFilter('cat','Hematología',this)">🩸 Hematología</button>
+        <button class="filter-opt" onclick="setFilter('cat','Neurología',this)">🧠 Neurología</button>
+        <button class="filter-opt" onclick="setFilter('cat','Reumatología',this)">🦴 Reumatología</button>
+        <button class="filter-opt" onclick="setFilter('cat','Cardiología',this)">❤️ Cardiología</button>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Año</div>
+      <div class="filter-group">
+        <button class="filter-opt active" onclick="setFilter('year','todas',this)">Todos</button>
+        <button class="filter-opt" onclick="setFilter('year','2025',this)">2025</button>
+        <button class="filter-opt" onclick="setFilter('year','2024',this)">2024</button>
+        <button class="filter-opt" onclick="setFilter('year','2023',this)">2023</button>
+        <button class="filter-opt" onclick="setFilter('year','2022',this)">2022</button>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="results-header">
+      <div>
+        <div class="results-title">Evaluaciones de Tecnologías Sanitarias</div>
+        <div class="results-count" id="resultsCount">Mostrando 8 de 200 resultados</div>
+      </div>
+      <select class="sort-select">
+        <option>Más reciente primero</option>
+        <option>Nombre A–Z</option>
+        <option>Institución</option>
+        <option>Dictamen</option>
+      </select>
+    </div>
+
+    <div class="ets-grid" id="etsList"></div>
+
+    <div class="pagination">
+      <button class="page-btn active">1</button>
+      <button class="page-btn">2</button>
+      <button class="page-btn">3</button>
+      <button class="page-btn">···</button>
+      <button class="page-btn">25</button>
+    </div>
+  </main>
+
+</div>
+
+<!-- DETAIL PANEL -->
+<div class="detail-overlay" id="detailOverlay" onclick="closeDetail(event)">
+  <div class="detail-panel" id="detailPanel">
+    <div class="detail-header">
+      <div class="detail-close">
+        <div style="display:flex; gap:8px; align-items:center;">
+          <span id="detailBadge" class="dictamen-badge fav">● Favorable</span>
+        </div>
+        <button class="close-btn" onclick="closeDetailPanel()">✕</button>
+      </div>
+      <div class="detail-drug-name" id="detailDrug">Ibrutinib</div>
+      <div class="detail-commercial" id="detailCommercial">Imbruvica® · Janssen</div>
+    </div>
+
+    <div class="detail-body">
+
+      <!-- Dictamen box -->
+      <div class="dictamen-box fav" id="detailDictamenBox">
+        <div class="dictamen-icon">✅</div>
+        <div class="dictamen-text">
+          <strong id="detailDictamenTitle">Dictamen Favorable</strong>
+          <span id="detailDictamenSub">Recomendado para cobertura bajo la indicación evaluada</span>
+        </div>
+      </div>
+
+      <!-- Info grid -->
+      <div class="detail-section">
+        <div class="detail-section-title">Información general</div>
+        <div class="info-grid">
+          <div class="info-item">
+            <label>Institución</label>
+            <span id="detailInst">IETSI – EsSalud</span>
+          </div>
+          <div class="info-item">
+            <label>Año</label>
+            <span id="detailYear">2024</span>
+          </div>
+          <div class="info-item">
+            <label>Especialidad</label>
+            <span id="detailCat">Oncología</span>
+          </div>
+          <div class="info-item">
+            <label>Tipo ETS</label>
+            <span id="detailTipo">ETS-EMC</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PICO -->
+      <div class="detail-section">
+        <div class="detail-section-title">Pregunta PICO</div>
+        <div class="pico-box">
+          <div class="pico-row">
+            <div class="pico-label">P</div>
+            <div class="pico-value" id="detailP">Pacientes adultos con linfoma de células del manto en recaída o refractario tras al menos una línea de tratamiento previo</div>
+          </div>
+          <div class="pico-row">
+            <div class="pico-label">I</div>
+            <div class="pico-value" id="detailI">Ibrutinib 560 mg/día vía oral</div>
+          </div>
+          <div class="pico-row">
+            <div class="pico-label">C</div>
+            <div class="pico-value" id="detailC">Mejor tratamiento disponible (quimioterapia convencional)</div>
+          </div>
+          <div class="pico-row">
+            <div class="pico-label">O</div>
+            <div class="pico-value" id="detailO">Supervivencia global, supervivencia libre de progresión, tasa de respuesta global, calidad de vida</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resumen -->
+      <div class="detail-section">
+        <div class="detail-section-title">Resumen de hallazgos</div>
+        <div class="summary-text" id="detailSummary">
+          La evidencia disponible muestra que ibrutinib mejora significativamente la supervivencia libre de progresión (SLP) en comparación con las opciones de quimioterapia convencional. Los estudios fase III demostraron una mediana de SLP de 14.6 meses frente a 6.1 meses del comparador. El perfil de seguridad es manejable, con efectos adversos principalmente hematológicos y cardiovasculares.
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="detail-actions">
+        <a href="#" class="btn-primary">📄 Ver PDF completo</a>
+        <button class="btn-secondary">🔗 Fuente oficial</button>
+      </div>
+
+      <!-- Chat -->
+      <div class="chat-section">
+        <div class="chat-title">
+          💬 Consultar este documento con IA
+          <span class="chat-badge">Beta</span>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+          <div class="msg ai">Hola, puedo responder preguntas sobre este dictamen. ¿Qué quieres saber?</div>
+        </div>
+        <div class="chat-input-row">
+          <input type="text" class="chat-input" id="chatInput" placeholder="Ej: ¿Cuál fue el comparador utilizado?" onkeydown="if(event.key==='Enter') sendChat()">
+          <button class="chat-send" onclick="sendChat()">➤</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <strong>ETS Perú</strong> · Repositorio basado en documentos públicos de RENETSA · Desarrollado por <strong>Health & Tech</strong></p>
+</footer>
+
+<script>
+// ── DATA ──
+const etsData = [
+  { id:1, drug:"Ibrutinib", commercial:"Imbruvica® · Janssen", indication:"Linfoma de células del manto en recaída o refractario tras al menos una línea previa", inst:"IETSI", system:"EsSalud", year:"2024", cat:"Oncología", dictamen:"favorable", tipo:"ETS-EMC", P:"Adultos con linfoma de células del manto en recaída/refractario", I:"Ibrutinib 560 mg/día VO", C:"Quimioterapia convencional", O:"Supervivencia global, SLP, tasa de respuesta", summary:"Ibrutinib demostró mejoría significativa en SLP (14.6 vs 6.1 meses) frente a quimioterapia estándar. Perfil de seguridad manejable con efectos adversos principalmente hematológicos." },
+  { id:2, drug:"Pembrolizumab", commercial:"Keytruda® · MSD", indication:"Cáncer de pulmón no microcítico con expresión PD-L1 ≥50%, sin mutaciones EGFR/ALK", inst:"IETSI", system:"EsSalud", year:"2023", cat:"Oncología", dictamen:"condicionado", tipo:"ETS-EMC", P:"Adultos con CPNM avanzado PD-L1≥50% sin EGFR/ALK", I:"Pembrolizumab 200mg IV c/3sem", C:"Quimioterapia basada en platino", O:"Supervivencia global, SLP, seguridad", summary:"Se recomienda cobertura condicionada a confirmación de expresión PD-L1 ≥50% mediante test validado. La evidencia muestra beneficio en SG con HR 0.63 (IC95% 0.47–0.86)." },
+  { id:3, drug:"Olaparib", commercial:"Lynparza® · AstraZeneca", indication:"Cáncer de ovario epitelial con mutación BRCA en mantenimiento tras quimioterapia con platino", inst:"INS-SETS", system:"MINSA", year:"2023", cat:"Oncología", dictamen:"no favorable", tipo:"ETS-C", P:"Adultas con cáncer de ovario BRCA+ en respuesta a platino", I:"Olaparib 300mg VO c/12h", C:"Placebo / vigilancia activa", O:"SLP, SG, calidad de vida", summary:"A pesar del beneficio en SLP, la relación costo-efectividad no es favorable en el contexto del sistema de salud peruano. El costo incremental supera los umbrales establecidos por la norma." },
+  { id:4, drug:"Nusinersén", commercial:"Spinraza® · Biogen", indication:"Atrofia muscular espinal tipos I, II y III en pacientes pediátricos", inst:"INS-SETS", system:"MINSA", year:"2024", cat:"Enf. Raras", dictamen:"favorable", tipo:"ETS-EMC", P:"Pacientes pediátricos con AME tipo I, II, III confirmada genéticamente", I:"Nusinersén 12mg IT cada 4 meses (mantenimiento)", C:"Cuidados paliativos / soporte estándar", O:"Función motora, supervivencia, hitos del desarrollo", summary:"Evidencia sólida de mejoría en función motora y supervivencia. Se recomienda cobertura prioritaria para AME tipo I dado el impacto en mortalidad. Para tipos II/III condicionado a centros especializados." },
+  { id:5, drug:"Emicizumab", commercial:"Hemlibra® · Roche", indication:"Profilaxis de episodios hemorrágicos en hemofilia A con inhibidores del factor VIII", inst:"IETSI", system:"EsSalud", year:"2023", cat:"Hematología", dictamen:"favorable", tipo:"ETS-EMC", P:"Pacientes con hemofilia A con inhibidores del FVIII ≥0.6 UB", I:"Emicizumab SC semanal/quincenal/mensual", C:"Tratamiento a demanda con agentes bypass", O:"Tasa anualizada de sangrado, calidad de vida", summary:"Emicizumab redujo la tasa anualizada de sangrado en un 87% comparado con tratamiento a demanda. La comodidad de administración SC mejora adherencia. Recomendado con seguimiento en centros hemofilia." },
+  { id:6, drug:"Ruxolitinib", commercial:"Jakavi® · Novartis", indication:"Mielofibrosis primaria y secundaria de riesgo intermedio o alto", inst:"INS-SETS", system:"MINSA", year:"2022", cat:"Hematología", dictamen:"no favorable", tipo:"ETS-C", P:"Adultos con mielofibrosis primaria/secundaria riesgo intermedio-2 o alto (IPSS)", I:"Ruxolitinib 15-20mg VO c/12h", C:"Hidroxiurea / mejor tratamiento disponible", O:"Respuesta esplénica, síntomas, SG", summary:"Aunque demuestra beneficio en reducción de esplenomegalia, la evidencia de impacto en supervivencia global es limitada. El alto costo no justifica la cobertura universal bajo el umbral de costo-efectividad nacional." },
+  { id:7, drug:"Natalizumab", commercial:"Tysabri® · Biogen", indication:"Esclerosis múltiple recurrente-remitente altamente activa o de rápida evolución", inst:"IETSI", system:"EsSalud", year:"2024", cat:"Neurología", dictamen:"condicionado", tipo:"ETS-EMC", P:"Adultos con EMRR altamente activa sin respuesta a primera línea", I:"Natalizumab 300mg IV c/4 semanas", C:"Interferón beta / acetato de glatirámero", O:"Tasa de recaídas, progresión discapacidad, RMN", summary:"Reducción del 68% en tasa anual de recaídas comparado con interferón. Cobertura condicionada a test JC virus negativo previo y seguimiento cada 6 meses por riesgo de LMP en pacientes JC positivos." },
+  { id:8, drug:"Dupilumab", commercial:"Dupixent® · Sanofi", indication:"Dermatitis atópica moderada-grave en adultos no controlada con tratamiento tópico", inst:"IETSI", system:"EsSalud", year:"2024", cat:"Dermatología", dictamen:"condicionado", tipo:"ETS-EMC", P:"Adultos con DA moderada-grave (EASI≥16) sin respuesta a corticoides/inhibidores calcineurina", I:"Dupilumab 300mg SC c/2 semanas", C:"Ciclosporina / metotrexato", O:"EASI-75, DLQI, calidad de vida", summary:"Dupilumab logró EASI-75 en 52% de pacientes vs 15% del comparador a las 16 semanas. Cobertura condicionada a falla demostrada a 2 inmunomoduladores convencionales y valoración dermatológica especializada." },
+];
+
+let activeFilters = { inst: 'todas', cat: 'todas', year: 'todas', dictamen: [] };
+let searchTerm = '';
+
+function renderCards(data) {
+  const list = document.getElementById('etsList');
+  list.innerHTML = '';
+  if (data.length === 0) {
+    list.innerHTML = '<div class="empty-state"><div class="empty-icon">🔍</div><h3>No se encontraron resultados</h3><p>Intenta con otros términos o ajusta los filtros</p></div>';
+    return;
+  }
+  data.forEach((d, i) => {
+    const dictClass = d.dictamen === 'favorable' ? 'fav' : d.dictamen === 'no favorable' ? 'nofav' : 'cond';
+    const dictLabel = d.dictamen === 'favorable' ? '✓ Favorable' : d.dictamen === 'no favorable' ? '✗ No favorable' : '≈ Condicionado';
+    const instClass = d.system === 'EsSalud' ? 'tag-essalud' : 'tag-inst';
+    const card = document.createElement('div');
+    card.className = 'ets-card';
+    card.style.animationDelay = (i * 0.05) + 's';
+    card.innerHTML = `
+      <div class="card-left">
+        <div>
+          <span class="card-drug">${d.drug}</span>
+          <span class="card-commercial"> — ${d.commercial}</span>
+        </div>
+        <div class="card-indication">${d.indication}</div>
+        <div class="card-tags">
+          <span class="tag ${instClass}">${d.inst} · ${d.system}</span>
+          <span class="tag tag-year">${d.year}</span>
+          <span class="tag tag-cat">${d.cat}</span>
+        </div>
+      </div>
+      <div class="card-right">
+        <div class="dictamen-badge ${dictClass}">${dictLabel}</div>
+        <span class="card-arrow">›</span>
+      </div>
+    `;
+    card.onclick = () => openDetail(d);
+    list.appendChild(card);
+  });
+  document.getElementById('resultsCount').textContent = `Mostrando ${data.length} de 200 resultados`;
+}
+
+function filterCards() {
+  searchTerm = document.getElementById('searchInput').value.toLowerCase();
+  let result = etsData.filter(d => {
+    const matchSearch = !searchTerm ||
+      d.drug.toLowerCase().includes(searchTerm) ||
+      d.indication.toLowerCase().includes(searchTerm) ||
+      d.cat.toLowerCase().includes(searchTerm) ||
+      d.inst.toLowerCase().includes(searchTerm) ||
+      d.dictamen.toLowerCase().includes(searchTerm);
+    const matchInst = activeFilters.inst === 'todas' || d.inst === activeFilters.inst;
+    const matchCat = activeFilters.cat === 'todas' || d.cat === activeFilters.cat;
+    const matchYear = activeFilters.year === 'todas' || d.year === activeFilters.year;
+    const matchDict = activeFilters.dictamen.length === 0 || activeFilters.dictamen.includes(d.dictamen);
+    return matchSearch && matchInst && matchCat && matchYear && matchDict;
+  });
+  renderCards(result);
+}
+
+function setFilter(type, value, btn) {
+  activeFilters[type] = value;
+  const group = btn.closest('.filter-group');
+  group.querySelectorAll('.filter-opt').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterCards();
+}
+
+function toggleDictamen(value, btn) {
+  const idx = activeFilters.dictamen.indexOf(value);
+  if (idx > -1) {
+    activeFilters.dictamen.splice(idx, 1);
+    btn.classList.remove('active');
+  } else {
+    activeFilters.dictamen.push(value);
+    btn.classList.add('active');
+  }
+  filterCards();
+}
+
+function setSearch(term) {
+  document.getElementById('searchInput').value = term;
+  filterCards();
+}
+
+// ── DETAIL PANEL ──
+function openDetail(d) {
+  const dictClass = d.dictamen === 'favorable' ? 'fav' : d.dictamen === 'no favorable' ? 'nofav' : 'cond';
+  const dictLabel = d.dictamen === 'favorable' ? '● Favorable' : d.dictamen === 'no favorable' ? '● No favorable' : '● Condicionado';
+  const dictIcon = d.dictamen === 'favorable' ? '✅' : d.dictamen === 'no favorable' ? '❌' : '⚠️';
+  const dictTitle = d.dictamen === 'favorable' ? 'Dictamen Favorable' : d.dictamen === 'no favorable' ? 'Dictamen No Favorable' : 'Dictamen Condicionado';
+  const dictSub = d.dictamen === 'favorable' ? 'Recomendado para cobertura bajo la indicación evaluada' : d.dictamen === 'no favorable' ? 'No se recomienda cobertura en la indicación evaluada' : 'Cobertura recomendada bajo condiciones específicas';
+
+  document.getElementById('detailDrug').textContent = d.drug;
+  document.getElementById('detailCommercial').textContent = d.commercial;
+  document.getElementById('detailBadge').className = `dictamen-badge ${dictClass}`;
+  document.getElementById('detailBadge').textContent = dictLabel;
+  document.getElementById('detailDictamenBox').className = `dictamen-box ${dictClass}`;
+  document.getElementById('detailDictamenBox').querySelector('.dictamen-icon').textContent = dictIcon;
+  document.getElementById('detailDictamenTitle').textContent = dictTitle;
+  document.getElementById('detailDictamenSub').textContent = dictSub;
+  document.getElementById('detailInst').textContent = `${d.inst} – ${d.system}`;
+  document.getElementById('detailYear').textContent = d.year;
+  document.getElementById('detailCat').textContent = d.cat;
+  document.getElementById('detailTipo').textContent = d.tipo;
+  document.getElementById('detailP').textContent = d.P;
+  document.getElementById('detailI').textContent = d.I;
+  document.getElementById('detailC').textContent = d.C;
+  document.getElementById('detailO').textContent = d.O;
+  document.getElementById('detailSummary').textContent = d.summary;
+
+  // reset chat
+  document.getElementById('chatMessages').innerHTML = `<div class="msg ai">Hola, puedo responder preguntas sobre el dictamen de <strong>${d.drug}</strong>. ¿Qué quieres saber?</div>`;
+
+  document.getElementById('detailOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDetailPanel() {
+  document.getElementById('detailOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeDetail(e) {
+  if (e.target === document.getElementById('detailOverlay')) closeDetailPanel();
+}
+
+// ── CHAT MOCK ──
+const chatResponses = {
+  'comparador': 'El comparador utilizado en esta evaluación fue la mejor terapia disponible según la práctica clínica local, que incluye quimioterapia convencional.',
+  'costo': 'La evaluación incluye análisis de costo-efectividad con un umbral de 3 PIB per cápita por AVAC ganado. El costo incremental fue evaluado en el contexto del sistema de salud peruano.',
+  'eficacia': 'Los datos de eficacia se basaron en estudios fase III con seguimiento mínimo de 24 meses, mostrando beneficio estadísticamente significativo en el desenlace primario.',
+  'seguridad': 'El perfil de seguridad fue evaluado mediante análisis sistemático de eventos adversos. Los efectos más frecuentes fueron hematológicos (grado 1-2) y manejables con ajuste de dosis.',
+  default: 'Basándome en el contenido del dictamen, puedo indicar que esta información está detallada en la sección de resultados del documento completo. ¿Deseas que profundice en algún aspecto específico como eficacia, seguridad o costo-efectividad?'
+};
+
+function sendChat() {
+  const input = document.getElementById('chatInput');
+  const msg = input.value.trim();
+  if (!msg) return;
+
+  const messages = document.getElementById('chatMessages');
+  messages.innerHTML += `<div class="msg user">${msg}</div>`;
+  input.value = '';
+
+  setTimeout(() => {
+    const lower = msg.toLowerCase();
+    let response = chatResponses.default;
+    for (const key of Object.keys(chatResponses)) {
+      if (lower.includes(key)) { response = chatResponses[key]; break; }
+    }
+    messages.innerHTML += `<div class="msg ai">${response}</div>`;
+    messages.scrollTop = messages.scrollHeight;
+  }, 600);
+
+  messages.scrollTop = messages.scrollHeight;
+}
+
+// ── INIT ──
+renderCards(etsData);
+</script>
+</body>
+</html>
