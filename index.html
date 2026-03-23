@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Repositorio Peruano de Evaluaciones de Tecnologías Sanitarias</title>
+<title>Repositorio Peruano de Resultados de Tecnologías Sanitarias</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style> 
 :root {
-  --navy: #2d3b65;
-  --navy-dark: #1e2a4a;
-  --navy-light: #3d4f84;
+  --navy: #3f4d7a;
+  --navy-dark: #2d3a63;
+  --navy-light: #53639a;
   --navy-pale: #eef1f8;
   --green: #9abb50;
   --green-dark: #7da040;
@@ -34,7 +34,7 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Inter', sans-serif;
-  background: var(--off-white);
+  background: #ffffff;
   color: var(--text);
   min-height: 100vh;
 }
@@ -55,7 +55,7 @@ body {
 
 /* ── TOPBAR ── */
 .topbar {
-  background: var(--navy);
+  background: #2d3b65;
   height: 64px;
   display: flex;
   align-items: center;
@@ -69,47 +69,164 @@ body {
 
 .logo {
   display: flex;
-  align-items: center;
-  gap: 14px;
-  text-decoration: none;
-}
-
-.logo-emblem {
-  width: 36px;
-  height: 36px;
-  background: var(--green);
-  border-radius: 6px;
-  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  gap: 2px;
+  text-decoration: none;
+  min-width: 130px;
+  border: none;
+  background: transparent;
+  padding: 4px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s ease;
 }
 
-.logo-emblem svg {
-  width: 22px;
-  height: 22px;
+.logo:hover,
+.logo-dropdown.open .logo {
+  background: rgba(255,255,255,0.08);
+}
+
+.logo-mark {
+  width: 56px;
+  height: 39px;
+  position: relative;
+  flex-shrink: 0;
+  background: transparent;
+}
+
+.logo-cross-v,
+.logo-cross-h {
+  position: absolute;
+  background: var(--green);
+  border-radius: 2px;
+}
+
+.logo-cross-v {
+  width: 11px;
+  height: 41px;
+  left: 22px;
+  top: -2px;
+}
+
+.logo-cross-h {
+  width: 33px;
+  height: 9px;
+  left: 9px;
+  top: 13px;
+  background: #a8c36a;
+}
+
+.logo-letter {
+  position: absolute;
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 0 rgba(0,0,0,0);
+}
+
+.logo-letter-t {
+  font-size: 42px;
+  left: 0;
+  top: -4px;
+}
+
+.logo-letter-s {
+  font-size: 42px;
+  left: 26px;
+  top: -4px;
 }
 
 .logo-text {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 0;
   line-height: 1.15;
 }
 
 .logo-title {
   font-family: 'Playfair Display', serif;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 700;
   color: white;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.1px;
+  display: none;
 }
 
 .logo-subtitle {
-  font-size: 10px;
-  font-weight: 400;
-  color: rgba(255,255,255,0.5);
-  letter-spacing: 1.2px;
+  font-size: 8.5px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.72);
+  letter-spacing: 0.8px;
   text-transform: uppercase;
+  text-align: center;
+  white-space: nowrap;
+}
+
+
+.logo-dropdown {
+  position: relative;
+}
+
+.logo-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 220px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow-lg);
+  padding: 10px;
+  z-index: 280;
+}
+
+.logo-dropdown.open .logo-menu {
+  display: block;
+}
+
+.logo-menu-title {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.6px;
+  color: var(--muted);
+  padding: 4px 6px 8px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 6px;
+}
+
+.logo-menu-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: transparent;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 12.5px;
+  line-height: 1.45;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+
+.logo-menu-item:hover {
+  background: rgba(154,187,80,0.08);
+  color: var(--green-dark);
+}
+
+.logo-menu-item.active {
+  color: var(--green-dark);
+  font-weight: 600;
 }
 
 .topnav {
@@ -130,6 +247,297 @@ body {
 }
 
 .topnav a:hover { color: white; background: rgba(255,255,255,0.08); }
+
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-dropdown > button {
+  color: rgba(255,255,255,0.65);
+  text-decoration: none;
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  padding: 6px 12px;
+  border-radius: 5px;
+  transition: all 0.15s;
+  border: none;
+  background: transparent;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+}
+
+.nav-dropdown > button:hover {
+  color: white;
+  background: rgba(255,255,255,0.08);
+}
+
+.nav-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 320px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow-lg);
+  padding: 12px;
+  z-index: 260;
+}
+
+.nav-dropdown.open .nav-dropdown-menu {
+  display: block;
+}
+
+.nav-dropdown-title {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.6px;
+  color: var(--muted);
+  padding: 4px 6px 8px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 6px;
+}
+
+.topnav .nav-dropdown-item {
+  display: block;
+  text-decoration: none;
+  color: var(--text) !important;
+  font-size: 12.5px;
+  line-height: 1.45;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: transparent !important;
+}
+
+.topnav .nav-dropdown-item:hover {
+  background: rgba(154,187,80,0.08);
+  color: var(--green-dark) !important;
+}
+
+.topnav .nav-dropdown-item.active {
+  background: transparent !important;
+  color: var(--green-dark) !important;
+  font-weight: 600;
+}
+
+.nav-dropdown-faq:hover .nav-dropdown-menu {
+  display: block;
+}
+
+.faq-menu {
+  width: 380px;
+  top: 100%;
+}
+
+.recent-menu {
+  width: 360px;
+  top: 100%;
+}
+
+.recent-doc-item {
+  display: block;
+  text-decoration: none;
+  color: var(--text) !important;
+  padding: 8px 10px;
+  border-radius: 6px;
+  transition: background 0.15s ease;
+}
+
+.recent-doc-item:hover {
+  background: rgba(154,187,80,0.08);
+  color: var(--green-dark) !important;
+}
+
+.recent-doc-title {
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.recent-doc-meta {
+  margin-top: 2px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.filters-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 420;
+  background: rgba(20,28,54,0.55);
+  backdrop-filter: blur(1px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.filters-overlay.open { display: flex; }
+
+.filters-card {
+  width: min(640px, 96vw);
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.filters-head {
+  background: var(--navy-dark);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+}
+
+.filters-head strong {
+  font-size: 13px;
+  letter-spacing: 0.4px;
+}
+
+.filters-close {
+  border: none;
+  background: transparent;
+  color: rgba(255,255,255,0.9);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.filters-body {
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.filters-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.filter-chip {
+  border: 1px solid var(--border);
+  background: #f9fbff;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 12.5px;
+  color: var(--text);
+}
+
+.filters-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.nav-dropdown-faq > button:hover {
+  color: white !important;
+  background: rgba(255,255,255,0.08) !important;
+}
+
+.normativa-menu {
+  width: 390px;
+  top: 100%;
+}
+
+.nav-dropdown.normativa-dropdown > button:hover {
+  color: white !important;
+  background: rgba(255,255,255,0.08) !important;
+}
+
+.normativa-dropdown.open .nav-dropdown-menu {
+  display: block;
+}
+
+.menu-group-title {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--navy);
+  padding: 0;
+}
+
+.menu-subitem {
+  display: block;
+  text-decoration: none;
+  color: var(--text) !important;
+  font-size: 12px;
+  line-height: 1.4;
+  padding: 6px 10px 6px 24px;
+  border-radius: 6px;
+}
+
+.menu-subitem:hover {
+  background: rgba(154,187,80,0.08);
+  color: var(--green-dark);
+}
+
+.norm-tree {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.norm-sublist {
+  list-style: none;
+  margin: 0 0 6px 0;
+  padding: 0;
+  display: none;
+}
+
+.norm-tree > li.open .norm-sublist {
+  display: block;
+}
+
+.menu-group-toggle {
+  width: 100%;
+  border: none;
+  background: transparent;
+  text-align: left;
+  font-family: 'Inter', sans-serif;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.15s ease;
+}
+
+.menu-group-toggle:hover .menu-group-title,
+.norm-tree > li.open .menu-group-title {
+  color: var(--green-dark);
+}
+
+.norm-tree > li.open .menu-group-toggle {
+  background: rgba(154,187,80,0.12);
+  border-left: 3px solid var(--green);
+  padding-left: 7px;
+}
+
+.menu-group-caret {
+  color: var(--muted);
+  font-size: 11px;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.norm-tree > li.open .menu-group-caret {
+  transform: rotate(90deg);
+  color: var(--green-dark);
+}
+
+.norm-tree > li.open .norm-sublist {
+  border-left: 2px solid rgba(154,187,80,0.28);
+  margin-left: 10px;
+  padding-left: 4px;
+}
 
 .nav-divider {
   width: 1px;
@@ -152,10 +560,133 @@ body {
   color: white !important;
 }
 
+/* ── PREMIUM NOTICE ── */
+.premium-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(20,30,55,0.45);
+  backdrop-filter: blur(3px);
+  z-index: 350;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.premium-overlay.open {
+  display: flex;
+}
+
+.premium-card {
+  width: min(540px, 100%);
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  animation: fadeUp 0.22s ease both;
+}
+
+.premium-card-head {
+  background: linear-gradient(120deg, #2d3b65 0%, #3f4d7a 100%);
+  color: white;
+  padding: 18px 52px 18px 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.premium-card-head strong {
+  font-family: 'Inter', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  line-height: 1;
+  text-transform: none;
+  text-shadow: none;
+  color: #ffffff;
+  text-align: center;
+}
+
+.premium-close {
+  border: none;
+  background: rgba(255,255,255,0.14);
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.premium-close:hover {
+  background: rgba(255,255,255,0.24);
+}
+
+.premium-card-body {
+  padding: 26px 24px 24px;
+  text-align: center;
+}
+
+.premium-badge {
+  display: inline-flex;
+  align-items: center;
+  background: var(--green-pale);
+  border: 1px solid rgba(154,187,80,0.4);
+  color: var(--green-dark);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  margin: 0 auto 14px;
+}
+
+.premium-title {
+  font-family: 'Playfair Display', serif;
+  color: var(--navy);
+  font-size: 32px;
+  line-height: 1.05;
+  margin-bottom: 12px;
+  max-width: 460px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.premium-text {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 0 auto 18px;
+  max-width: 560px;
+}
+
+.premium-foot {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.premium-pill {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--navy);
+  background: var(--navy-pale);
+  border: 1px solid rgba(45,59,101,0.2);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+
 /* ── HERO ── */
 .hero {
   background: var(--navy);
-  padding: 64px 40px 80px;
+  padding: 52px 40px 66px;
   position: relative;
   overflow: hidden;
 }
@@ -184,13 +715,13 @@ body {
   background: rgba(154,187,80,0.12);
   border: 1px solid rgba(154,187,80,0.35);
   color: var(--green);
-  font-size: 10.5px;
-  font-weight: 700;
+  font-size: 9.5px;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 2.5px;
-  padding: 6px 16px;
+  letter-spacing: 2px;
+  padding: 5px 13px;
   border-radius: 3px;
-  margin-bottom: 24px;
+  margin-bottom: 18px;
 }
 
 .hero-tag .tag-dot {
@@ -201,31 +732,89 @@ body {
 
 .hero h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 48px;
-  font-weight: 700;
+  font-size: 42px;
+  font-weight: 600;
   color: white;
-  line-height: 1.1;
-  margin-bottom: 8px;
+  line-height: 1.08;
+  margin-bottom: 6px;
   letter-spacing: -0.5px;
 }
 
-.hero h1 .accent { color: var(--green); }
+.hero h1 .accent {
+  color: var(--green);
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 0.88em;
+  letter-spacing: 0;
+  position: relative;
+  top: -1px;
+}
+
+.hero-logo-down {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 6px;
+  margin: 2px auto 14px;
+  text-align: center;
+}
+
+.hero-logo-down .logo-mark {
+  width: 140px;
+  height: 96px;
+}
+
+.hero-logo-down .logo-cross-v {
+  width: 24px;
+  height: 100px;
+  left: 56px;
+  top: -4px;
+}
+
+.hero-logo-down .logo-cross-h {
+  width: 80px;
+  height: 18px;
+  left: 28px;
+  top: 32px;
+}
+
+.hero-logo-down .logo-letter-t,
+.hero-logo-down .logo-letter-s {
+  font-size: 98px;
+  top: -10px;
+}
+
+.hero-logo-down .logo-letter-t { left: 0; }
+.hero-logo-down .logo-letter-s { left: 62px; }
+
+.hero-logo-down .logo-subtitle {
+  font-size: 17px;
+  letter-spacing: 1.4px;
+  color: rgba(255,255,255,0.88);
+}
+
+.hero-logo-down .logo-text {
+  width: auto;
+  justify-content: center;
+}
 
 .hero-subtitle {
   font-family: 'Playfair Display', serif;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
-  color: rgba(255,255,255,0.55);
-  margin-bottom: 28px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 22px;
   font-style: italic;
   letter-spacing: 0.3px;
 }
 
 .hero-desc {
-  color: rgba(255,255,255,0.6);
-  font-size: 15px;
-  line-height: 1.7;
-  margin-bottom: 40px;
+  color: rgba(255,255,255,0.52);
+  font-size: 14px;
+  line-height: 1.65;
+  margin-bottom: 30px;
   max-width: 620px;
   margin-left: auto;
   margin-right: auto;
@@ -235,14 +824,18 @@ body {
 .search-box {
   background: white;
   border-radius: 8px;
-  padding: 5px 5px 5px 18px;
+  padding: 4px 4px 4px 16px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   box-shadow: var(--shadow-lg);
-  margin-bottom: 20px;
+  margin-bottom: 14px;
   border: 1.5px solid transparent;
   transition: border-color 0.2s;
+}
+
+.search-wrap {
+  position: relative;
 }
 
 .search-box:focus-within {
@@ -260,7 +853,7 @@ body {
   border: none;
   outline: none;
   font-family: 'Inter', sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text);
   background: transparent;
 }
@@ -272,16 +865,108 @@ body {
   color: white;
   border: none;
   border-radius: 6px;
-  padding: 12px 28px;
+  height: 40px;
+  padding: 0 22px;
   font-family: 'Inter', sans-serif;
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.15s;
   letter-spacing: 0.3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-width: 96px;
 }
 
 .search-btn:hover { background: var(--navy-light); }
+
+.filters-btn {
+  background: rgba(154,187,80,0.16);
+  color: var(--green-dark);
+  border: 1px solid rgba(154,187,80,0.55);
+  border-radius: 6px;
+  height: 40px;
+  padding: 0 14px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-width: 92px;
+}
+
+.search-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 196px;
+}
+
+.filters-btn:hover {
+  border-color: var(--green-dark);
+  color: #ffffff;
+  background: var(--green-dark);
+}
+
+.search-suggestions {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  z-index: 240;
+  text-align: left;
+}
+
+.search-suggestions.open {
+  display: block;
+}
+
+.search-suggestion-item {
+  width: 100%;
+  border: none;
+  background: transparent;
+  text-align: left;
+  padding: 10px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border);
+  font-family: 'Inter', sans-serif;
+}
+
+.search-suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.search-suggestion-item:hover {
+  background: rgba(154,187,80,0.08);
+}
+
+.suggestion-generic {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.suggestion-commercial {
+  display: block;
+  font-size: 11.5px;
+  color: var(--muted);
+  margin-top: 2px;
+}
 
 .search-chips {
   display: flex;
@@ -294,9 +979,9 @@ body {
   background: rgba(255,255,255,0.07);
   border: 1px solid rgba(255,255,255,0.14);
   color: rgba(255,255,255,0.55);
-  font-size: 11.5px;
+  font-size: 10.5px;
   font-weight: 500;
-  padding: 5px 13px;
+  padding: 4px 11px;
   border-radius: 3px;
   cursor: pointer;
   transition: all 0.15s;
@@ -343,6 +1028,11 @@ body {
   color: var(--navy);
   display: block;
   line-height: 1;
+}
+
+.stat-num--country {
+  font-size: 26px;
+  letter-spacing: 0.02em;
 }
 
 .stat-lbl {
@@ -607,6 +1297,7 @@ body {
 .tag-inst { background: var(--navy-pale); color: var(--navy); }
 .tag-essalud { background: var(--green-pale); color: var(--green-dark); }
 .tag-year { background: var(--gray); color: #555; }
+.tag-tipo { background: rgba(154,187,80,0.18); color: #5d7f1f; }
 .tag-cat { background: #ede8f8; color: #5b3baa; }
 .tag-sub { background: #fce8f0; color: #a52060; }
 
@@ -838,6 +1529,22 @@ body {
   border-radius: 7px;
   padding: 16px 18px;
 }
+
+.summary-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+
+.summary-list {
+  margin: 8px 0 0 18px;
+  padding: 0;
+}
+
+.summary-list li { margin-bottom: 4px; }
 
 .detail-actions {
   display: flex;
@@ -1272,6 +1979,14 @@ body {
   position: relative;
 }
 
+.sponsor-inner.simple {
+  max-width: 900px;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  justify-items: center;
+  text-align: center;
+}
+
 .sponsor-eyebrow {
   font-size: 9.5px;
   font-weight: 700;
@@ -1356,6 +2071,26 @@ body {
   text-align: center;
   letter-spacing: 0.5px;
   line-height: 1.5;
+}
+
+.sponsor-links-line {
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+.sponsor-links-line a {
+  color: rgba(255,255,255,0.72);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.sponsor-links-line a:hover {
+  color: var(--green);
 }
 
 .sponsor-stats-block {
@@ -1480,27 +2215,147 @@ footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
 
 <!-- TOPBAR -->
 <div class="topbar">
-  <a class="logo" href="#">
-    <div class="logo-emblem">
-      <!-- Caduceo / Cruz médica icon -->
-      <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="9" y="1" width="4" height="20" rx="1.5" fill="white" opacity="0.9"/>
-        <rect x="1" y="9" width="20" height="4" rx="1.5" fill="white" opacity="0.9"/>
-      </svg>
+  <div class="logo-dropdown" id="logoDropdown">
+    <button class="logo" id="logoDropdownToggle" type="button" aria-expanded="false">
+      <div class="logo-mark" aria-hidden="true">
+        <span class="logo-cross-v"></span>
+        <span class="logo-cross-h"></span>
+        <span class="logo-letter logo-letter-t">T</span>
+        <span class="logo-letter logo-letter-s">S</span>
+      </div>
+      <div class="logo-text">
+        <span class="logo-title">Dictámenes oficiales / Perú ETS</span>
+        <span class="logo-subtitle">Tecnologías & Salud</span>
+      </div>
+    </button>
+    <div class="logo-menu">
+      <div class="logo-menu-title">Región</div>
+      <button class="logo-menu-item active" type="button" data-region="Perú">Perú</button>
+      <button class="logo-menu-item" type="button" data-region="Chile">Chile</button>
+      <button class="logo-menu-item" type="button" data-region="Colombia">Colombia</button>
+      <button class="logo-menu-item" type="button" data-region="México">México</button>
     </div>
-    <div class="logo-text">
-      <span class="logo-title">Dictámenes oficiales / Perú ETS</span>
-      <span class="logo-subtitle">Lima · Perú</span>
-    </div>
-  </a>
+  </div>
   <nav class="topnav">
+    <div class="nav-dropdown" id="navDropdown">
+      <button type="button" id="navDropdownToggle" aria-expanded="false">Tipo de evaluación ▾</button>
+      <div class="nav-dropdown-menu">
+        <div class="nav-dropdown-title">Tipo de evaluación</div>
+        <a class="nav-dropdown-item" href="#">Evaluación multicriterio de tecnologías sanitarias</a>
+        <a class="nav-dropdown-item" href="#">Metodología GRADE adaptada al Perú</a>
+        <a class="nav-dropdown-item" href="#">Evaluación económica</a>
+        <a class="nav-dropdown-item" href="#">Guía de práctica clínica</a>
+      </div>
+    </div>
     <a href="#">Por Patología</a>
     <a href="#">Por Institución</a>
-    <a href="#">Normativa</a>
+    <div class="nav-dropdown" id="recentDropdown">
+      <button type="button" id="recentDropdownToggle" aria-expanded="false">Noticias ▾</button>
+      <div class="nav-dropdown-menu recent-menu">
+        <div class="nav-dropdown-title">Últimos 5 publicados</div>
+        <div id="recentDocsList"></div>
+      </div>
+    </div>
+    <div class="nav-dropdown normativa-dropdown" id="normativaDropdown">
+      <button type="button" id="normativaDropdownToggle" aria-expanded="false">Normativa ▾</button>
+      <div class="nav-dropdown-menu normativa-menu">
+        <div class="nav-dropdown-title">Normativa</div>
+        <ul class="norm-tree">
+          <li class="open">
+            <button type="button" class="menu-group-toggle">
+              <span class="menu-group-title">Ley principal de compra</span>
+              <span class="menu-group-caret">▸</span>
+            </button>
+            <ul class="norm-sublist">
+              <li><a class="menu-subitem" href="#">Reglamento</a></li>
+              <li><a class="menu-subitem" href="#">Actualización</a></li>
+            </ul>
+          </li>
+          <li>
+            <button type="button" class="menu-group-toggle">
+              <span class="menu-group-title">Ley de evaluación sanitaria y clasificación</span>
+              <span class="menu-group-caret">▸</span>
+            </button>
+            <ul class="norm-sublist">
+              <li><a class="menu-subitem" href="#">Decreto 028</a></li>
+              <li><a class="menu-subitem" href="#">Reglamento</a></li>
+            </ul>
+          </li>
+          <li>
+            <button type="button" class="menu-group-toggle">
+              <span class="menu-group-title">Normativa internacional</span>
+              <span class="menu-group-caret">▸</span>
+            </button>
+            <ul class="norm-sublist">
+              <li><a class="menu-subitem" href="#">Para enfermedades oncológicas</a></li>
+              <li><a class="menu-subitem" href="#">Para enfermedades raras y huérfanas</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
     <a href="#">¿Qué es una ETS?</a>
+    <div class="nav-dropdown nav-dropdown-faq">
+      <button type="button">Preguntas frecuentes ▾</button>
+      <div class="nav-dropdown-menu faq-menu">
+        <div class="nav-dropdown-title">Preguntas frecuentes</div>
+        <a class="nav-dropdown-item" href="#">¿Qué es una ETS?</a>
+        <a class="nav-dropdown-item" href="#">¿Qué instituciones evalúan tecnologías en Perú?</a>
+        <a class="nav-dropdown-item" href="#">¿Qué significa un resultado favorable?</a>
+        <a class="nav-dropdown-item" href="#">¿Qué es IETSI y qué es INS-SETS?</a>
+        <a class="nav-dropdown-item" href="#">¿Qué incluye la metodología GRADE?</a>
+        <a class="nav-dropdown-item" href="#">¿Cómo se interpreta un análisis de costo-efectividad?</a>
+        <a class="nav-dropdown-item" href="#">¿Qué es una pregunta PICO?</a>
+        <a class="nav-dropdown-item" href="#">¿Cómo buscar por patología o molécula?</a>
+        <a class="nav-dropdown-item" href="#">¿Qué diferencia hay entre ETS-EMC y ETS-C?</a>
+        <a class="nav-dropdown-item" href="#">¿Cómo descargar o citar un resultado oficial?</a>
+      </div>
+    </div>
     <div class="nav-divider"></div>
-    <a href="#" class="nav-cta">Acceso Premium</a>
+    <a href="#" class="nav-cta" onclick="openPremiumNotice(event)">Acceso Premium</a>
   </nav>
+</div>
+
+<div class="premium-overlay" id="premiumOverlay" onclick="closePremiumNotice(event)">
+  <div class="premium-card">
+    <div class="premium-card-head">
+      <strong>Acceso Premium</strong>
+      <button class="premium-close" onclick="closePremiumNotice()" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="premium-card-body">
+      <span class="premium-badge">Próximamente</span>
+      <h3 class="premium-title">Estamos trabajando en una experiencia Premium</h3>
+      <p class="premium-text">Muy pronto habilitaremos nuevos módulos con analítica avanzada, reportes descargables y funcionalidades exclusivas para representantes de la industria, médicos y tomadores de decisión.</p>
+      <div class="premium-foot">
+        <span class="premium-pill">Diseño en progreso</span>
+        <span class="premium-pill">Nuevas funciones</span>
+        <span class="premium-pill">Lanzamiento próximo</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="filters-overlay" id="filtersOverlay" onclick="closeFiltersPopup(event)">
+  <div class="filters-card">
+    <div class="filters-head">
+      <strong>Filtros avanzados</strong>
+      <button class="filters-close" onclick="closeFiltersPopup()" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="filters-body">
+      <div class="filters-grid">
+        <div class="filter-chip">Rango de fecha de publicación</div>
+        <div class="filter-chip">Tipo de estudio detallado</div>
+        <div class="filter-chip">Institución y región</div>
+        <div class="filter-chip">Estado regulatorio</div>
+        <div class="filter-chip">Población / severidad</div>
+        <div class="filter-chip">Desenlaces críticos (PICO)</div>
+      </div>
+      <div class="filters-actions">
+        <button class="btn-secondary" onclick="closeFiltersPopup()">Cerrar</button>
+        <button class="btn-primary" onclick="closeFiltersPopup()">Entendido</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- HERO -->
@@ -1508,17 +2363,32 @@ footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
   <div class="hero-bg"></div>
   <div class="hero-inner">
     <div class="hero-tag">
-      <span class="tag-dot"></span>
-      IETSI – EsSalud &nbsp;·&nbsp; INS-SETS – MINSA &nbsp;·&nbsp; RENETSA
+      ETS-EMC &nbsp;|&nbsp; TS INNOVADORAS &nbsp;|&nbsp; GRADE FRAMEWORK &nbsp;|&nbsp; COSTO-EFECTIVIDAD
     </div>
-    <h1>Evaluaciones de Tecnologías<br>Sanitarias <span class="accent">(ETS)</span></h1>
-    <div class="hero-subtitle">Repositorio peruano</div>
-    <p class="hero-desc">Base de datos técnica de Evaluaciones de Tecnologías Sanitarias publicadas en Perú. Búsqueda avanzada sobre 200+ dictámenes indexados de las instituciones evaluadoras autorizadas.</p>
+    <div class="hero-logo-down" role="img" aria-label="Tecnologías & Salud">
+      <div class="logo-mark" aria-hidden="true">
+        <span class="logo-cross-v"></span>
+        <span class="logo-cross-h"></span>
+        <span class="logo-letter logo-letter-t">T</span>
+        <span class="logo-letter logo-letter-s">S</span>
+      </div>
+      <div class="logo-text">
+        <span class="logo-subtitle">Tecnologías & Salud</span>
+      </div>
+    </div>
+    <div class="hero-subtitle">Observatorio multidisciplinar de documentos técnicos para la toma de decisiones en salud</div>
+    <p class="hero-desc">Una iniciativa de TRS, consultora dedicada al soporte técnico-estratégico para el acceso de tecnologías sanitarias a sistemas de salud fragmentados.</p>
 
-    <div class="search-box">
-      <span class="search-icon">⌕</span>
-      <input type="text" id="searchInput" placeholder="Buscar por medicamento, patología, indicación o institución..." oninput="filterCards()">
-      <button class="search-btn" onclick="filterCards()">Buscar</button>
+    <div class="search-wrap">
+      <div class="search-box">
+        <span class="search-icon">⌕</span>
+        <input type="text" id="searchInput" placeholder="Ej: Paracetamol (Panadol, Tylenol) · Ibuprofeno (Advil, Motrin)..." oninput="filterCards()">
+        <div class="search-actions">
+          <button class="search-btn" onclick="filterCards()">Buscar</button>
+          <button class="filters-btn" onclick="openFilters()">Filtros</button>
+        </div>
+      </div>
+      <div id="searchSuggestions" class="search-suggestions"></div>
     </div>
 
     <div class="search-chips">
@@ -1539,6 +2409,10 @@ footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
     <span class="stat-lbl">ETS indexadas</span>
   </div>
   <div class="stat-item">
+    <span class="stat-num stat-num--country">1</span>
+    <span class="stat-lbl">País</span>
+  </div>
+  <div class="stat-item">
     <span class="stat-num">2</span>
     <span class="stat-lbl">Instituciones</span>
   </div>
@@ -1553,6 +2427,10 @@ footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
   <div class="stat-item">
     <span class="stat-num">100%</span>
     <span class="stat-lbl">Fuente oficial</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">23</span>
+    <span class="stat-lbl">Visitantes</span>
   </div>
 </div>
 
@@ -1580,7 +2458,7 @@ footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
     <div class="divider"></div>
 
     <div class="sidebar-section">
-      <div class="sidebar-title">Dictamen</div>
+      <div class="sidebar-title">Resultado</div>
       <div class="dictamen-filter">
         <button class="dict-btn fav" onclick="toggleDictamen('favorable',this)">
           <span class="dot"></span> Favorable
@@ -1591,6 +2469,18 @@ footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
         <button class="dict-btn cond" onclick="toggleDictamen('condicionado',this)">
           <span class="dot"></span> Condicionado
         </button>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Tipo de estudio</div>
+      <div class="filter-group">
+        <button class="filter-opt active" onclick="setFilter('tipo','todas',this)">Todos los tipos</button>
+        <button class="filter-opt" onclick="setFilter('tipo','ETS-EMC',this)">ETS-EMC</button>
+        <button class="filter-opt" onclick="setFilter('tipo','Evaluación Económica',this)">Evaluación Económica</button>
+        <button class="filter-opt" onclick="setFilter('tipo','GPC',this)">GPC</button>
       </div>
     </div>
 
@@ -1640,14 +2530,14 @@ footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
   <main class="main">
     <div class="results-header">
       <div>
-        <div class="results-title">Evaluaciones de Tecnologías Sanitarias</div>
+        <div class="results-title">Resultados de Tecnologías Sanitarias</div>
         <div class="results-count" id="resultsCount">Mostrando 8 de 200 resultados</div>
       </div>
       <select class="sort-select">
         <option>Más reciente primero</option>
         <option>Nombre A–Z</option>
         <option>Institución</option>
-        <option>Dictamen</option>
+        <option>Resultado</option>
       </select>
     </div>
 
@@ -1683,7 +2573,7 @@ footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
       <div class="dictamen-box fav" id="detailDictamenBox">
         <div class="dictamen-icon">✅</div>
         <div class="dictamen-text">
-          <strong id="detailDictamenTitle">Dictamen Favorable</strong>
+          <strong id="detailDictamenTitle">Resultado Favorable</strong>
           <span id="detailDictamenSub">Recomendado para cobertura bajo la indicación evaluada</span>
         </div>
       </div>
@@ -1715,7 +2605,7 @@ footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
       </div>
 
       <div class="detail-section">
-        <div class="detail-section-title">Pregunta PICO</div>
+        <div class="detail-section-title">PICO validada</div>
         <div class="pico-box">
           <div class="pico-row">
             <div class="pico-label">P</div>
@@ -1737,7 +2627,7 @@ footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
       </div>
 
       <div class="detail-section">
-        <div class="detail-section-title">Resumen de hallazgos</div>
+        <div class="detail-section-title">Resumen estructurado</div>
         <div class="summary-text" id="detailSummary">
           La evidencia disponible muestra que ibrutinib mejora significativamente la supervivencia libre de progresión (SLP) en comparación con las opciones de quimioterapia convencional.
         </div>
@@ -1748,20 +2638,6 @@ footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
         <button class="btn-secondary">🔗 Fuente oficial</button>
       </div>
 
-      <div class="chat-section">
-        <div class="chat-title">
-          Consultar con IA
-          <span class="chat-badge">Beta</span>
-        </div>
-        <div class="chat-messages" id="chatMessages">
-          <div class="msg ai">Hola, puedo responder preguntas sobre este dictamen. ¿Qué desea consultar?</div>
-        </div>
-        <div class="chat-input-row">
-          <input type="text" class="chat-input" id="chatInput" placeholder="Ej: ¿Cuál fue el comparador utilizado?" onkeydown="if(event.key==='Enter') sendChat()">
-          <button class="chat-send" onclick="sendChat()">➤</button>
-        </div>
-      </div>
-
     </div>
   </div>
 </div>
@@ -1769,58 +2645,24 @@ footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
 
 <!-- SPONSOR SECTION -->
 <section class="sponsor-section">
-  <div class="sponsor-inner">
-
-    <div class="sponsor-text-block">
-      <div class="sponsor-eyebrow">Auspiciador oficial</div>
-      <div class="sponsor-heading">Soporte técnico para<br>tecnologías sanitarias<br>de alto costo</div>
-      <p class="sponsor-body">Tecnologías & Salud facilita el acceso de fármacos innovadores y dispositivos médicos al sistema de salud peruano. Especialistas en Evaluación Multicriterio (EMC) y Metodología GRADE, asesoran a laboratorios farmacéuticos con soluciones basadas en evidencia científica para la obtención de dictámenes favorables ante IETSI y el INS-SETS.</p>
-      <div class="sponsor-pills">
-        <span class="sponsor-pill">ETS-EMC</span>
-        <span class="sponsor-pill">Metodología GRADE</span>
-        <span class="sponsor-pill">Revisiones sistemáticas</span>
-        <span class="sponsor-pill">Farmacoeconomía</span>
-        <span class="sponsor-pill">Soluciones tecnológicas</span>
+  <div class="sponsor-inner simple">
+    <div class="sponsor-eyebrow" style="margin-bottom:2px;">Auspiciador oficial</div>
+    <div class="sponsor-logo-block">
+      <img src="tts-logo.png" alt="Tecnologías & Salud" />
+      <div class="sponsor-tagline">
+        Tecnologías &amp; Salud<br>
+        Miraflores, Lima - Perú<br>
+        <a href="https://tecnologias-salud.org" target="_blank">tecnologias-salud.org</a>
       </div>
-      <div class="sponsor-clients">
-        <div class="sponsor-clients-label">Clientes que confían en nosotros</div>
-        <div class="sponsor-clients-list">
-          <span>Johnson &amp; Johnson</span>
-          <span>Roche</span>
-          <span>Amgen</span>
-          <span>Lilly</span>
-          <span>Adium</span>
-        </div>
+      <div class="sponsor-links-line">
+        <span>Redes:</span>
+        <a href="#" target="_blank">LinkedIn</a>
+        <span>•</span>
+        <a href="#" target="_blank">Instagram</a>
+        <span>•</span>
+        <a href="#" target="_blank">Facebook</a>
       </div>
     </div>
-
-    <div class="sponsor-vert-divider"></div>
-
-    <div style="display:flex; flex-direction:column; align-items:center; gap:32px;">
-      <div class="sponsor-logo-block">
-        <img src="tts-logo.png" alt="Tecnologías & Salud" />
-        <div class="sponsor-tagline">Tecnologías &amp; Salud<br>Miraflores, Lima — Perú<br><a href="https://tecnologias-salud.org" target="_blank" style="color:rgba(255,255,255,0.35); text-decoration:none; transition:color 0.15s;" onmouseover="this.style.color='rgba(154,187,80,0.9)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">tecnologias-salud.org ↗</a></div>
-      </div>
-      <div class="sponsor-stats-block">
-        <div class="sponsor-stat">
-          <span class="sponsor-stat-num">ETS</span>
-          <span class="sponsor-stat-lbl">EMC · GRADE</span>
-        </div>
-        <div class="sponsor-stat">
-          <span class="sponsor-stat-num">5+</span>
-          <span class="sponsor-stat-lbl">Laboratorios clientes</span>
-        </div>
-        <div class="sponsor-stat">
-          <span class="sponsor-stat-num">2</span>
-          <span class="sponsor-stat-lbl">Instituciones evaluadoras</span>
-        </div>
-        <div class="sponsor-stat">
-          <span class="sponsor-stat-num">Perú</span>
-          <span class="sponsor-stat-lbl">Miraflores, Lima</span>
-        </div>
-      </div>
-    </div>
-
   </div>
 </section>
 
@@ -1851,7 +2693,20 @@ const etsData = [
   { id:11, drug:"Osimertinib", commercial:"Tagrisso® · AstraZeneca", indication:"Cáncer de pulmón no microcítico con mutación EGFR T790M en segunda línea", inst:"IETSI", system:"EsSalud", year:"2023", cat:"Oncología", sub:"Cáncer de pulmón", dictamen:"favorable", tipo:"ETS-EMC", P:"Adultos con CPNM avanzado con mutación EGFR T790M tras progresión a EGFR-TKI de primera o segunda generación", I:"Osimertinib 80mg VO/día", C:"Quimioterapia basada en platino (pemetrexed)", O:"SLP, SG, tasa de respuesta, calidad de vida", summary:"Osimertinib demostró SLP significativamente mayor (10.1 vs 4.4 meses) y mejor perfil de seguridad frente a quimioterapia. Requiere confirmación molecular de mutación T790M previo al inicio." },
 ];
 
-let activeFilters = { inst: 'todas', cat: 'todas', sub: 'todas', year: 'todas', dictamen: [] };
+const predictiveDrugs = [
+  { generic: "Paracetamol", commercial: "Panadol, Tylenol" },
+  { generic: "Ibuprofeno", commercial: "Advil, Motrin" },
+  { generic: "Amoxicilina", commercial: "Amoxil" },
+  { generic: "Acido acetilsalicilico", commercial: "Aspirina" },
+  { generic: "Metformina", commercial: "Glucophage" },
+  { generic: "Omeprazol", commercial: "Losec, Prilosec" },
+  { generic: "Loratadina", commercial: "Claritin" },
+  { generic: "Azitromicina", commercial: "Zithromax" },
+  { generic: "Diclofenaco", commercial: "Voltaren" },
+  { generic: "Atorvastatina", commercial: "Lipitor" }
+];
+
+let activeFilters = { inst: 'todas', tipo: 'todas', cat: 'todas', sub: 'todas', year: 'todas', dictamen: [] };
 let searchTerm = '';
 
 function renderCards(data) {
@@ -1878,6 +2733,7 @@ function renderCards(data) {
         <div class="card-tags">
           <span class="tag ${instClass}">${d.inst} · ${d.system}</span>
           <span class="tag tag-year">${d.year}</span>
+          <span class="tag tag-tipo">${d.tipo}</span>
           <span class="tag tag-cat">${d.cat}</span>
           ${d.sub ? `<span class="tag tag-sub">${d.sub}</span>` : ""}
         </div>
@@ -1898,19 +2754,22 @@ function filterCards() {
   let result = etsData.filter(d => {
     const matchSearch = !searchTerm ||
       d.drug.toLowerCase().includes(searchTerm) ||
+      d.commercial.toLowerCase().includes(searchTerm) ||
       d.indication.toLowerCase().includes(searchTerm) ||
       d.cat.toLowerCase().includes(searchTerm) ||
       (d.sub && d.sub.toLowerCase().includes(searchTerm)) ||
       d.inst.toLowerCase().includes(searchTerm) ||
       d.dictamen.toLowerCase().includes(searchTerm);
     const matchInst = activeFilters.inst === 'todas' || d.inst === activeFilters.inst;
+    const matchTipo = activeFilters.tipo === 'todas' || d.tipo === activeFilters.tipo;
     const matchCat = activeFilters.cat === 'todas' || d.cat === activeFilters.cat;
     const matchSub = activeFilters.sub === 'todas' || d.sub === activeFilters.sub;
     const matchYear = activeFilters.year === 'todas' || d.year === activeFilters.year;
     const matchDict = activeFilters.dictamen.length === 0 || activeFilters.dictamen.includes(d.dictamen);
-    return matchSearch && matchInst && matchCat && matchSub && matchYear && matchDict;
+    return matchSearch && matchInst && matchTipo && matchCat && matchSub && matchYear && matchDict;
   });
   renderCards(result);
+  renderSearchSuggestions();
 }
 
 function setFilter(type, value, btn) {
@@ -1951,12 +2810,100 @@ function setSearch(term) {
   filterCards();
 }
 
+function renderSearchSuggestions() {
+  const input = document.getElementById('searchInput');
+  const box = document.getElementById('searchSuggestions');
+  if (!input || !box) return;
+
+  const term = input.value.trim().toLowerCase();
+  if (!term) {
+    box.classList.remove('open');
+    box.innerHTML = '';
+    return;
+  }
+
+  const curatedMatches = predictiveDrugs.filter((d) =>
+    d.generic.toLowerCase().includes(term) ||
+    d.commercial.toLowerCase().includes(term)
+  ).slice(0, 6);
+
+  const etsMatches = etsData.filter((d) =>
+    d.drug.toLowerCase().includes(term) ||
+    d.commercial.toLowerCase().includes(term)
+  ).slice(0, 6);
+
+  const seen = new Set(curatedMatches.map((d) => d.generic.toLowerCase()));
+  const merged = [
+    ...curatedMatches,
+    ...etsMatches
+      .map((d) => ({ generic: d.drug, commercial: d.commercial }))
+      .filter((d) => !seen.has(d.generic.toLowerCase()))
+  ].slice(0, 8);
+
+  if (!merged.length) {
+    box.classList.remove('open');
+    box.innerHTML = '';
+    return;
+  }
+
+  box.innerHTML = merged.map((d) => `
+    <button class="search-suggestion-item" type="button" onclick="applySearchSuggestionText('${d.generic.replace(/'/g, "\\'")}')">
+      <span class="suggestion-generic">${d.generic}</span>
+      <span class="suggestion-commercial">${d.commercial}</span>
+    </button>
+  `).join('');
+  box.classList.add('open');
+}
+
+function applySearchSuggestionText(generic) {
+  const input = document.getElementById('searchInput');
+  const box = document.getElementById('searchSuggestions');
+  if (!input || !generic) return;
+  input.value = generic;
+  if (box) {
+    box.classList.remove('open');
+    box.innerHTML = '';
+  }
+  filterCards();
+}
+
+function openFilters() {
+  const overlay = document.getElementById('filtersOverlay');
+  if (!overlay) return;
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeFiltersPopup(event) {
+  const overlay = document.getElementById('filtersOverlay');
+  if (!overlay) return;
+  if (event && event.target !== overlay) return;
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function openPremiumNotice(event) {
+  if (event) event.preventDefault();
+  const overlay = document.getElementById('premiumOverlay');
+  if (!overlay) return;
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePremiumNotice(event) {
+  const overlay = document.getElementById('premiumOverlay');
+  if (!overlay) return;
+  if (event && event.target !== overlay) return;
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
 // ── DETAIL PANEL ──
 function openDetail(d) {
   const dictClass = d.dictamen === 'favorable' ? 'fav' : d.dictamen === 'no favorable' ? 'nofav' : 'cond';
   const dictLabel = d.dictamen === 'favorable' ? '● Favorable' : d.dictamen === 'no favorable' ? '● No favorable' : '● Condicionado';
   const dictIcon = d.dictamen === 'favorable' ? '✅' : d.dictamen === 'no favorable' ? '❌' : '⚠️';
-  const dictTitle = d.dictamen === 'favorable' ? 'Dictamen Favorable' : d.dictamen === 'no favorable' ? 'Dictamen No Favorable' : 'Dictamen Condicionado';
+  const dictTitle = d.dictamen === 'favorable' ? 'Resultado Favorable' : d.dictamen === 'no favorable' ? 'Resultado No Favorable' : 'Resultado Condicionado';
   const dictSub = d.dictamen === 'favorable' ? 'Recomendado para cobertura bajo la indicación evaluada' : d.dictamen === 'no favorable' ? 'No se recomienda cobertura en la indicación evaluada' : 'Cobertura recomendada bajo condiciones específicas';
 
   document.getElementById('detailDrug').textContent = d.drug;
@@ -1977,12 +2924,35 @@ function openDetail(d) {
   document.getElementById('detailI').textContent = d.I;
   document.getElementById('detailC').textContent = d.C;
   document.getElementById('detailO').textContent = d.O;
-  document.getElementById('detailSummary').textContent = d.summary;
-
-  document.getElementById('chatMessages').innerHTML = `<div class="msg ai">Hola, puedo responder preguntas sobre el dictamen de <strong>${d.drug}</strong>. ¿Qué desea consultar?</div>`;
+  document.getElementById('detailSummary').innerHTML = buildStructuredSummary(d, dictTitle);
 
   document.getElementById('detailOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
+}
+
+function buildStructuredSummary(d, dictTitle) {
+  const tipoNota =
+    d.tipo === 'ETS-EMC'
+      ? 'Este formato corresponde a ETS-EMC.'
+      : d.tipo === 'GPC'
+        ? 'Este formato corresponde a GPC y prioriza recomendaciones clínicas.'
+        : 'Este formato corresponde a evaluación económica/costo-efectividad.';
+
+  return `
+    <div class="summary-title">Resumen ejecutivo</div>
+    <p><strong>Resumen:</strong> ${d.summary}</p>
+    <p><strong>Resultado:</strong> ${dictTitle}.</p>
+    <p><strong>Seguridad y eficacia:</strong> evaluación de desenlaces críticos (P, I, C, O), magnitud del beneficio, riesgos y certeza de evidencia.</p>
+    <p><strong>Criterios de valor social:</strong></p>
+    <ul class="summary-list">
+      <li>Necesidad no satisfecha del sistema y de los pacientes.</li>
+      <li>Valor de innovación incremental frente a alternativas.</li>
+      <li>Equidad y acceso oportuno para la población objetivo.</li>
+      <li>Uso de recursos y sostenibilidad presupuestal.</li>
+    </ul>
+    <p><strong>Voto razonado:</strong> se detallan fundamentos a favor y en contra en la deliberación final.</p>
+    <p><strong>Tipo de estudio:</strong> ${d.tipo}. ${tipoNota}</p>
+  `;
 }
 
 function closeDetailPanel() {
@@ -1994,39 +2964,183 @@ function closeDetail(e) {
   if (e.target === document.getElementById('detailOverlay')) closeDetailPanel();
 }
 
-// ── CHAT MOCK ──
-const chatResponses = {
-  'comparador': 'El comparador utilizado en esta evaluación fue la mejor terapia disponible según la práctica clínica local, que incluye quimioterapia convencional.',
-  'costo': 'La evaluación incluye análisis de costo-efectividad con un umbral de 3 PIB per cápita por AVAC ganado. El costo incremental fue evaluado en el contexto del sistema de salud peruano.',
-  'eficacia': 'Los datos de eficacia se basaron en estudios fase III con seguimiento mínimo de 24 meses, mostrando beneficio estadísticamente significativo en el desenlace primario.',
-  'seguridad': 'El perfil de seguridad fue evaluado mediante análisis sistemático de eventos adversos. Los efectos más frecuentes fueron hematológicos (grado 1-2) y manejables con ajuste de dosis.',
-  default: 'Basándome en el contenido del dictamen, puedo indicar que esta información está detallada en la sección de resultados del documento completo. ¿Desea que profundice en algún aspecto específico como eficacia, seguridad o costo-efectividad?'
-};
+function renderRecentDocs() {
+  const container = document.getElementById('recentDocsList');
+  if (!container) return;
 
-function sendChat() {
-  const input = document.getElementById('chatInput');
-  const msg = input.value.trim();
-  if (!msg) return;
+  const topFive = [...etsData]
+    .sort((a, b) => {
+      const byYear = Number(b.year) - Number(a.year);
+      return byYear !== 0 ? byYear : Number(b.id) - Number(a.id);
+    })
+    .slice(0, 5);
 
-  const messages = document.getElementById('chatMessages');
-  messages.innerHTML += `<div class="msg user">${msg}</div>`;
-  input.value = '';
-
-  setTimeout(() => {
-    const lower = msg.toLowerCase();
-    let response = chatResponses.default;
-    for (const key of Object.keys(chatResponses)) {
-      if (lower.includes(key)) { response = chatResponses[key]; break; }
-    }
-    messages.innerHTML += `<div class="msg ai">${response}</div>`;
-    messages.scrollTop = messages.scrollHeight;
-  }, 600);
-
-  messages.scrollTop = messages.scrollHeight;
+  container.innerHTML = topFive.map((d) => `
+    <a href="#" class="recent-doc-item" onclick="setSearch('${d.drug.toLowerCase()}'); filterCards(); return false;">
+      <div class="recent-doc-title">${d.drug} — ${d.tipo}</div>
+      <div class="recent-doc-meta">${d.inst} · ${d.year} · ${d.cat}</div>
+    </a>
+  `).join('');
 }
 
 // ── INIT ──
+const logoDropdown = document.getElementById('logoDropdown');
+const logoDropdownToggle = document.getElementById('logoDropdownToggle');
+
+if (logoDropdown && logoDropdownToggle) {
+  const logoItems = logoDropdown.querySelectorAll('.logo-menu-item');
+
+  logoDropdownToggle.addEventListener('click', (event) => {
+    event.stopPropagation();
+    const isOpen = logoDropdown.classList.toggle('open');
+    logoDropdownToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  logoItems.forEach((item) => {
+    item.addEventListener('click', (event) => {
+      event.preventDefault();
+      const region = item.dataset.region || 'Perú';
+      logoItems.forEach((el) => el.classList.remove('active'));
+      item.classList.add('active');
+      logoDropdown.classList.remove('open');
+      logoDropdownToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!logoDropdown.contains(event.target)) {
+      logoDropdown.classList.remove('open');
+      logoDropdownToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      logoDropdown.classList.remove('open');
+      logoDropdownToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
+
+const navDropdown = document.getElementById('navDropdown');
+const navDropdownToggle = document.getElementById('navDropdownToggle');
+
+if (navDropdown && navDropdownToggle) {
+  const dropdownItems = navDropdown.querySelectorAll('.nav-dropdown-item');
+
+  navDropdownToggle.addEventListener('click', (event) => {
+    event.stopPropagation();
+    const isOpen = navDropdown.classList.toggle('open');
+    navDropdownToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  dropdownItems.forEach((item) => {
+    item.addEventListener('click', (event) => {
+      event.preventDefault();
+      dropdownItems.forEach((el) => el.classList.remove('active'));
+      item.classList.add('active');
+      navDropdown.classList.remove('open');
+      navDropdownToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!navDropdown.contains(event.target)) {
+      navDropdown.classList.remove('open');
+      navDropdownToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      navDropdown.classList.remove('open');
+      navDropdownToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
+
+const recentDropdown = document.getElementById('recentDropdown');
+const recentDropdownToggle = document.getElementById('recentDropdownToggle');
+
+if (recentDropdown && recentDropdownToggle) {
+  recentDropdownToggle.addEventListener('click', (event) => {
+    event.stopPropagation();
+    const isOpen = recentDropdown.classList.toggle('open');
+    recentDropdownToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!recentDropdown.contains(event.target)) {
+      recentDropdown.classList.remove('open');
+      recentDropdownToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      recentDropdown.classList.remove('open');
+      recentDropdownToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
+
+const normativaDropdown = document.getElementById('normativaDropdown');
+const normativaDropdownToggle = document.getElementById('normativaDropdownToggle');
+
+if (normativaDropdown && normativaDropdownToggle) {
+  const normativaGroups = normativaDropdown.querySelectorAll('.norm-tree > li');
+  const normativaToggles = normativaDropdown.querySelectorAll('.menu-group-toggle');
+
+  normativaDropdownToggle.addEventListener('click', (event) => {
+    event.stopPropagation();
+    const isOpen = normativaDropdown.classList.toggle('open');
+    normativaDropdownToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  normativaToggles.forEach((toggle) => {
+    toggle.addEventListener('click', (event) => {
+      event.preventDefault();
+      const parent = toggle.closest('li');
+      if (!parent) return;
+      const willOpen = !parent.classList.contains('open');
+      normativaGroups.forEach((group) => group.classList.remove('open'));
+      if (willOpen) parent.classList.add('open');
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!normativaDropdown.contains(event.target)) {
+      normativaDropdown.classList.remove('open');
+      normativaDropdownToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      normativaDropdown.classList.remove('open');
+      normativaDropdownToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    closePremiumNotice();
+    closeFiltersPopup();
+  }
+});
+
+document.addEventListener('click', (event) => {
+  const box = document.getElementById('searchSuggestions');
+  const input = document.getElementById('searchInput');
+  if (!box || !input) return;
+  if (!box.contains(event.target) && event.target !== input) {
+    box.classList.remove('open');
+  }
+});
+
 renderCards(etsData);
+renderRecentDocs();
 </script>
 </body>
 </html>
