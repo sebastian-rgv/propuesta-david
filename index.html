@@ -2210,7 +2210,7 @@ footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
 
 <!-- ANNOUNCEMENT BAR -->
 <div class="announcement-bar">
-  Base de datos actualizada al <strong>I Trimestre 2025</strong> &nbsp;·&nbsp; 200+ dictámenes indexados de IETSI – EsSalud e INS-SETS – MINSA
+  Base de datos actualizada al <strong>I Trimestre 2025</strong> &nbsp;·&nbsp; 200+ dictámenes indexados de IETSI – EsSalud e INS-CETS – MINSA
 </div>
 
 <!-- TOPBAR -->
@@ -2302,7 +2302,7 @@ footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
         <a class="nav-dropdown-item" href="#">¿Qué es una ETS?</a>
         <a class="nav-dropdown-item" href="#">¿Qué instituciones evalúan tecnologías en Perú?</a>
         <a class="nav-dropdown-item" href="#">¿Qué significa un resultado favorable?</a>
-        <a class="nav-dropdown-item" href="#">¿Qué es IETSI y qué es INS-SETS?</a>
+        <a class="nav-dropdown-item" href="#">¿Qué es IETSI y qué es INS-CETS?</a>
         <a class="nav-dropdown-item" href="#">¿Qué incluye la metodología GRADE?</a>
         <a class="nav-dropdown-item" href="#">¿Cómo se interpreta un análisis de costo-efectividad?</a>
         <a class="nav-dropdown-item" href="#">¿Qué es una pregunta PICO?</a>
@@ -2392,12 +2392,12 @@ footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
     </div>
 
     <div class="search-chips">
-      <div class="search-chip" onclick="setSearch('ibrutinib')">Ibrutinib</div>
-      <div class="search-chip" onclick="setSearch('cáncer de mama')">Cáncer de mama</div>
-      <div class="search-chip" onclick="setSearch('cáncer de pulmón')">Cáncer de pulmón</div>
-      <div class="search-chip" onclick="setSearch('favorable')">Solo favorables</div>
-      <div class="search-chip" onclick="setSearch('IETSI')">IETSI – EsSalud</div>
-      <div class="search-chip" onclick="setSearch('enf. raras')">Enfermedades Raras</div>
+      <div class="search-chip" onclick="CETSearch('ibrutinib')">Ibrutinib</div>
+      <div class="search-chip" onclick="CETSearch('cáncer de mama')">Cáncer de mama</div>
+      <div class="search-chip" onclick="CETSearch('cáncer de pulmón')">Cáncer de pulmón</div>
+      <div class="search-chip" onclick="CETSearch('favorable')">Solo favorables</div>
+      <div class="search-chip" onclick="CETSearch('IETSI')">IETSI – EsSalud</div>
+      <div class="search-chip" onclick="CETSearch('enf. raras')">Enfermedades Raras</div>
     </div>
   </div>
 </div>
@@ -2449,8 +2449,8 @@ footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
         <button class="filter-opt" onclick="setFilter('inst','IETSI',this)">
           IETSI – EsSalud <span class="filter-count">124</span>
         </button>
-        <button class="filter-opt" onclick="setFilter('inst','INS-SETS',this)">
-          INS-SETS – MINSA <span class="filter-count">76</span>
+        <button class="filter-opt" onclick="setFilter('inst','INS-CETS',this)">
+          INS-CETS – MINSA <span class="filter-count">76</span>
         </button>
       </div>
     </div>
@@ -2668,7 +2668,7 @@ footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2025 <strong>Repositorio Peruano de ETS</strong> · Basado en documentos públicos de RENETSA, IETSI y INS-SETS · Solo referencia informativa</p>
+  <p>© 2025 <strong>Repositorio Peruano de ETS</strong> · Basado en documentos públicos de RENETSA, IETSI y INS-CETS · Solo referencia informativa</p>
   <div class="footer-links">
     <a href="#">Aviso legal</a>
     <a href="#">Política de privacidad</a>
@@ -2682,10 +2682,10 @@ footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
 const etsData = [
   { id:1, drug:"Ibrutinib", commercial:"Imbruvica® · Janssen", indication:"Linfoma de células del manto en recaída o refractario tras al menos una línea previa", inst:"IETSI", system:"EsSalud", year:"2024", cat:"Oncología", sub:"Cáncer hematológico", dictamen:"favorable", tipo:"ETS-EMC", P:"Adultos con linfoma de células del manto en recaída/refractario", I:"Ibrutinib 560 mg/día VO", C:"Quimioterapia convencional", O:"Supervivencia global, SLP, tasa de respuesta", summary:"Ibrutinib demostró mejoría significativa en SLP (14.6 vs 6.1 meses) frente a quimioterapia estándar. Perfil de seguridad manejable con efectos adversos principalmente hematológicos." },
   { id:2, drug:"Pembrolizumab", commercial:"Keytruda® · MSD", indication:"Cáncer de pulmón no microcítico con expresión PD-L1 ≥50%, sin mutaciones EGFR/ALK", inst:"IETSI", system:"EsSalud", year:"2023", cat:"Oncología", sub:"Cáncer de pulmón", dictamen:"condicionado", tipo:"ETS-EMC", P:"Adultos con CPNM avanzado PD-L1≥50% sin EGFR/ALK", I:"Pembrolizumab 200mg IV c/3sem", C:"Quimioterapia basada en platino", O:"Supervivencia global, SLP, seguridad", summary:"Se recomienda cobertura condicionada a confirmación de expresión PD-L1 ≥50% mediante test validado. La evidencia muestra beneficio en SG con HR 0.63 (IC95% 0.47–0.86)." },
-  { id:3, drug:"Olaparib", commercial:"Lynparza® · AstraZeneca", indication:"Cáncer de ovario epitelial con mutación BRCA en mantenimiento tras quimioterapia con platino", inst:"INS-SETS", system:"MINSA", year:"2023", cat:"Oncología", sub:"Cáncer de ovario", dictamen:"no favorable", tipo:"ETS-C", P:"Adultas con cáncer de ovario BRCA+ en respuesta a platino", I:"Olaparib 300mg VO c/12h", C:"Placebo / vigilancia activa", O:"SLP, SG, calidad de vida", summary:"A pesar del beneficio en SLP, la relación costo-efectividad no es favorable en el contexto del sistema de salud peruano. El costo incremental supera los umbrales establecidos por la norma." },
-  { id:4, drug:"Nusinersén", commercial:"Spinraza® · Biogen", indication:"Atrofia muscular espinal tipos I, II y III en pacientes pediátricos", inst:"INS-SETS", system:"MINSA", year:"2024", cat:"Enf. Raras", sub:"", dictamen:"favorable", tipo:"ETS-EMC", P:"Pacientes pediátricos con AME tipo I, II, III confirmada genéticamente", I:"Nusinersén 12mg IT cada 4 meses (mantenimiento)", C:"Cuidados paliativos / soporte estándar", O:"Función motora, supervivencia, hitos del desarrollo", summary:"Evidencia sólida de mejoría en función motora y supervivencia. Se recomienda cobertura prioritaria para AME tipo I dado el impacto en mortalidad. Para tipos II/III condicionado a centros especializados." },
+  { id:3, drug:"Olaparib", commercial:"Lynparza® · AstraZeneca", indication:"Cáncer de ovario epitelial con mutación BRCA en mantenimiento tras quimioterapia con platino", inst:"INS-CETS", system:"MINSA", year:"2023", cat:"Oncología", sub:"Cáncer de ovario", dictamen:"no favorable", tipo:"ETS-C", P:"Adultas con cáncer de ovario BRCA+ en respuesta a platino", I:"Olaparib 300mg VO c/12h", C:"Placebo / vigilancia activa", O:"SLP, SG, calidad de vida", summary:"A pesar del beneficio en SLP, la relación costo-efectividad no es favorable en el contexto del sistema de salud peruano. El costo incremental supera los umbrales establecidos por la norma." },
+  { id:4, drug:"Nusinersén", commercial:"Spinraza® · Biogen", indication:"Atrofia muscular espinal tipos I, II y III en pacientes pediátricos", inst:"INS-CETS", system:"MINSA", year:"2024", cat:"Enf. Raras", sub:"", dictamen:"favorable", tipo:"ETS-EMC", P:"Pacientes pediátricos con AME tipo I, II, III confirmada genéticamente", I:"Nusinersén 12mg IT cada 4 meses (mantenimiento)", C:"Cuidados paliativos / soporte estándar", O:"Función motora, supervivencia, hitos del desarrollo", summary:"Evidencia sólida de mejoría en función motora y supervivencia. Se recomienda cobertura prioritaria para AME tipo I dado el impacto en mortalidad. Para tipos II/III condicionado a centros especializados." },
   { id:5, drug:"Emicizumab", commercial:"Hemlibra® · Roche", indication:"Profilaxis de episodios hemorrágicos en hemofilia A con inhibidores del factor VIII", inst:"IETSI", system:"EsSalud", year:"2023", cat:"Hematología", sub:"", dictamen:"favorable", tipo:"ETS-EMC", P:"Pacientes con hemofilia A con inhibidores del FVIII ≥0.6 UB", I:"Emicizumab SC semanal/quincenal/mensual", C:"Tratamiento a demanda con agentes bypass", O:"Tasa anualizada de sangrado, calidad de vida", summary:"Emicizumab redujo la tasa anualizada de sangrado en un 87% comparado con tratamiento a demanda. La comodidad de administración SC mejora adherencia. Recomendado con seguimiento en centros hemofilia." },
-  { id:6, drug:"Ruxolitinib", commercial:"Jakavi® · Novartis", indication:"Mielofibrosis primaria y secundaria de riesgo intermedio o alto", inst:"INS-SETS", system:"MINSA", year:"2022", cat:"Hematología", sub:"", dictamen:"no favorable", tipo:"ETS-C", P:"Adultos con mielofibrosis primaria/secundaria riesgo intermedio-2 o alto (IPSS)", I:"Ruxolitinib 15-20mg VO c/12h", C:"Hidroxiurea / mejor tratamiento disponible", O:"Respuesta esplénica, síntomas, SG", summary:"Aunque demuestra beneficio en reducción de esplenomegalia, la evidencia de impacto en supervivencia global es limitada. El alto costo no justifica la cobertura universal bajo el umbral de costo-efectividad nacional." },
+  { id:6, drug:"Ruxolitinib", commercial:"Jakavi® · Novartis", indication:"Mielofibrosis primaria y secundaria de riesgo intermedio o alto", inst:"INS-CETS", system:"MINSA", year:"2022", cat:"Hematología", sub:"", dictamen:"no favorable", tipo:"ETS-C", P:"Adultos con mielofibrosis primaria/secundaria riesgo intermedio-2 o alto (IPSS)", I:"Ruxolitinib 15-20mg VO c/12h", C:"Hidroxiurea / mejor tratamiento disponible", O:"Respuesta esplénica, síntomas, SG", summary:"Aunque demuestra beneficio en reducción de esplenomegalia, la evidencia de impacto en supervivencia global es limitada. El alto costo no justifica la cobertura universal bajo el umbral de costo-efectividad nacional." },
   { id:7, drug:"Natalizumab", commercial:"Tysabri® · Biogen", indication:"Esclerosis múltiple recurrente-remitente altamente activa o de rápida evolución", inst:"IETSI", system:"EsSalud", year:"2024", cat:"Neurología", sub:"", dictamen:"condicionado", tipo:"ETS-EMC", P:"Adultos con EMRR altamente activa sin respuesta a primera línea", I:"Natalizumab 300mg IV c/4 semanas", C:"Interferón beta / acetato de glatirámero", O:"Tasa de recaídas, progresión discapacidad, RMN", summary:"Reducción del 68% en tasa anual de recaídas comparado con interferón. Cobertura condicionada a test JC virus negativo previo y seguimiento cada 6 meses por riesgo de LMP en pacientes JC positivos." },
   { id:8, drug:"Dupilumab", commercial:"Dupixent® · Sanofi", indication:"Dermatitis atópica moderada-grave en adultos no controlada con tratamiento tópico", inst:"IETSI", system:"EsSalud", year:"2024", cat:"Dermatología", sub:"", dictamen:"condicionado", tipo:"ETS-EMC", P:"Adultos con DA moderada-grave (EASI≥16) sin respuesta a corticoides/inhibidores calcineurina", I:"Dupilumab 300mg SC c/2 semanas", C:"Ciclosporina / metotrexato", O:"EASI-75, DLQI, calidad de vida", summary:"Dupilumab logró EASI-75 en 52% de pacientes vs 15% del comparador a las 16 semanas. Cobertura condicionada a falla demostrada a 2 inmunomoduladores convencionales y valoración dermatológica especializada." },
   { id:9, drug:"Pertuzumab", commercial:"Perjeta® · Roche", indication:"Cáncer de mama HER2+ metastásico en combinación con trastuzumab y docetaxel", inst:"IETSI", system:"EsSalud", year:"2023", cat:"Oncología", sub:"Cáncer de mama", dictamen:"favorable", tipo:"ETS-EMC", P:"Adultas con cáncer de mama HER2+ metastásico sin tratamiento previo para enfermedad metastásica", I:"Pertuzumab 840mg IV luego 420mg c/3sem + trastuzumab + docetaxel", C:"Trastuzumab + docetaxel", O:"Supervivencia global, SLP, tasa de respuesta objetiva", summary:"El doblete anti-HER2 demostró beneficio significativo en SG (56.5 vs 40.8 meses). Perfil de seguridad consistente con los agentes individuales. Recomendado como estándar de primera línea en HER2+ metastásico." },
@@ -2805,7 +2805,7 @@ function toggleDictamen(value, btn) {
   filterCards();
 }
 
-function setSearch(term) {
+function CETSearch(term) {
   document.getElementById('searchInput').value = term;
   filterCards();
 }
@@ -2976,7 +2976,7 @@ function renderRecentDocs() {
     .slice(0, 5);
 
   container.innerHTML = topFive.map((d) => `
-    <a href="#" class="recent-doc-item" onclick="setSearch('${d.drug.toLowerCase()}'); filterCards(); return false;">
+    <a href="#" class="recent-doc-item" onclick="CETSearch('${d.drug.toLowerCase()}'); filterCards(); return false;">
       <div class="recent-doc-title">${d.drug} — ${d.tipo}</div>
       <div class="recent-doc-meta">${d.inst} · ${d.year} · ${d.cat}</div>
     </a>
