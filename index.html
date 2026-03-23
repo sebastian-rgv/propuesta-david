@@ -2392,12 +2392,12 @@ footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
     </div>
 
     <div class="search-chips">
-      <div class="search-chip" onclick="CETSearch('ibrutinib')">Ibrutinib</div>
-      <div class="search-chip" onclick="CETSearch('cáncer de mama')">Cáncer de mama</div>
-      <div class="search-chip" onclick="CETSearch('cáncer de pulmón')">Cáncer de pulmón</div>
-      <div class="search-chip" onclick="CETSearch('favorable')">Solo favorables</div>
-      <div class="search-chip" onclick="CETSearch('IETSI')">IETSI – EsSalud</div>
-      <div class="search-chip" onclick="CETSearch('enf. raras')">Enfermedades Raras</div>
+      <div class="search-chip" onclick="setSearch('ibrutinib')">Ibrutinib</div>
+      <div class="search-chip" onclick="setSearch('cáncer de mama')">Cáncer de mama</div>
+      <div class="search-chip" onclick="setSearch('cáncer de pulmón')">Cáncer de pulmón</div>
+      <div class="search-chip" onclick="setSearch('favorable')">Solo favorables</div>
+      <div class="search-chip" onclick="setSearch('IETSI')">IETSI – EsSalud</div>
+      <div class="search-chip" onclick="setSearch('enf. raras')">Enfermedades Raras</div>
     </div>
   </div>
 </div>
@@ -2805,7 +2805,7 @@ function toggleDictamen(value, btn) {
   filterCards();
 }
 
-function CETSearch(term) {
+function setSearch(term) {
   document.getElementById('searchInput').value = term;
   filterCards();
 }
@@ -2976,7 +2976,7 @@ function renderRecentDocs() {
     .slice(0, 5);
 
   container.innerHTML = topFive.map((d) => `
-    <a href="#" class="recent-doc-item" onclick="CETSearch('${d.drug.toLowerCase()}'); filterCards(); return false;">
+    <a href="#" class="recent-doc-item" onclick="setSearch('${d.drug.toLowerCase()}'); filterCards(); return false;">
       <div class="recent-doc-title">${d.drug} — ${d.tipo}</div>
       <div class="recent-doc-meta">${d.inst} · ${d.year} · ${d.cat}</div>
     </a>
