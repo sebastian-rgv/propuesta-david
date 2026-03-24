@@ -67,25 +67,57 @@ body {
   box-shadow: 0 2px 12px rgba(30,42,74,0.35);
 }
 
-.logo {
+.logo-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-lockup {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 2px;
-  text-decoration: none;
   min-width: 130px;
-  border: none;
-  background: transparent;
-  padding: 4px 8px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.15s ease;
+  padding: 4px 4px 4px 0;
+  user-select: none;
 }
 
-.logo:hover,
-.logo-dropdown.open .logo {
-  background: rgba(255,255,255,0.08);
+.logo-region-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background: transparent;
+  color: rgba(255,255,255,0.82);
+  font-family: 'Inter', sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
+}
+
+.logo-region-toggle:hover,
+.logo-dropdown.open .logo-region-toggle {
+  background: rgba(255,255,255,0.1);
+  color: #ffffff;
+}
+
+.logo-region-caret {
+  font-size: 11px;
+  line-height: 1;
+  opacity: 0.9;
+  transition: transform 0.2s ease;
+  display: inline-block;
+}
+
+.logo-dropdown.open .logo-region-caret {
+  transform: rotate(180deg);
 }
 
 .logo-mark {
@@ -330,6 +362,8 @@ body {
 .faq-menu {
   width: 380px;
   top: 100%;
+  max-height: min(70vh, 520px);
+  overflow-y: auto;
 }
 
 .recent-menu {
@@ -702,7 +736,7 @@ body {
 }
 
 .hero-inner {
-  max-width: 860px;
+  max-width: 980px;
   margin: 0 auto;
   text-align: center;
   position: relative;
@@ -750,74 +784,111 @@ body {
   top: -1px;
 }
 
-.hero-logo-down {
+.hero-brand-row {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 14px 18px;
   width: 100%;
-  gap: 6px;
-  margin: 2px auto 14px;
-  text-align: center;
+  margin: 2px auto 22px;
+  text-align: left;
+  flex-wrap: wrap;
 }
 
-.hero-logo-down .logo-mark {
+.hero-logo-side {
+  flex-shrink: 0;
+}
+
+.hero-logo-side .logo-mark {
   width: 140px;
   height: 96px;
 }
 
-.hero-logo-down .logo-cross-v {
+.hero-logo-side .logo-cross-v {
   width: 24px;
   height: 100px;
   left: 56px;
   top: -4px;
 }
 
-.hero-logo-down .logo-cross-h {
+.hero-logo-side .logo-cross-h {
   width: 80px;
   height: 18px;
   left: 28px;
   top: 32px;
 }
 
-.hero-logo-down .logo-letter-t,
-.hero-logo-down .logo-letter-s {
+.hero-logo-side .logo-letter-t,
+.hero-logo-side .logo-letter-s {
   font-size: 98px;
   top: -10px;
 }
 
-.hero-logo-down .logo-letter-t { left: 0; }
-.hero-logo-down .logo-letter-s { left: 62px; }
+.hero-logo-side .logo-letter-t { left: 0; }
+.hero-logo-side .logo-letter-s { left: 62px; }
 
-.hero-logo-down .logo-subtitle {
-  font-size: 17px;
-  letter-spacing: 1.4px;
-  color: rgba(255,255,255,0.88);
+.hero-title-side {
+  flex: 0 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
 }
 
-.hero-logo-down .logo-text {
-  width: auto;
-  justify-content: center;
+.hero-main-title {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(15px, 2.1vw, 19px);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.95);
+  line-height: 1.25;
+  text-align: center;
+}
+
+.hero-main-title-amp {
+  color: var(--green);
+  font-weight: 700;
+}
+
+.hero-subtitle,
+.hero-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.58);
+  letter-spacing: 0.02em;
+  font-style: normal;
 }
 
 .hero-subtitle {
-  font-family: 'Playfair Display', serif;
-  font-size: 16px;
-  font-weight: 400;
-  color: rgba(255,255,255,0.5);
-  margin-bottom: 22px;
-  font-style: italic;
-  letter-spacing: 0.3px;
+  margin-bottom: 12px;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .hero-desc {
-  color: rgba(255,255,255,0.52);
-  font-size: 14px;
-  line-height: 1.65;
   margin-bottom: 30px;
-  max-width: 620px;
+  max-width: 640px;
   margin-left: auto;
   margin-right: auto;
+}
+
+@media (max-width: 640px) {
+  .hero-brand-row {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .hero-title-side {
+    justify-content: center;
+    padding-right: 0;
+  }
+  .hero-main-title {
+    max-width: none;
+  }
 }
 
 /* ── SEARCH BOX ── */
@@ -1170,6 +1241,7 @@ body {
   background: currentColor;
   flex-shrink: 0;
 }
+
 
 /* ── MAIN CONTENT ── */
 .main {
@@ -1550,6 +1622,19 @@ body {
   display: flex;
   gap: 10px;
   margin-top: 8px;
+}
+
+.summary-more {
+  margin-top: 10px;
+  display: none;
+}
+
+.summary-more.open {
+  display: block;
+}
+
+.summary-more .summary-list {
+  margin-top: 6px;
 }
 
 .btn-primary {
@@ -1951,242 +2036,144 @@ body {
 
 .plan-btn.green:hover { background: var(--green-dark); color: white; }
 
-/* ── SPONSOR SECTION ── */
-.sponsor-section {
-  background: var(--navy-dark);
-  padding: 64px 40px;
-  position: relative;
-  overflow: hidden;
-}
-
-.sponsor-section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 500px 300px at 15% 50%, rgba(154,187,80,0.07) 0%, transparent 65%),
-    radial-gradient(ellipse 400px 300px at 85% 50%, rgba(255,222,89,0.04) 0%, transparent 60%);
-  pointer-events: none;
-}
-
-.sponsor-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 60px;
-  position: relative;
-}
-
-.sponsor-inner.simple {
-  max-width: 900px;
-  grid-template-columns: 1fr;
-  gap: 18px;
-  justify-items: center;
-  text-align: center;
-}
-
-.sponsor-eyebrow {
-  font-size: 9.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  color: var(--green);
-  margin-bottom: 14px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.sponsor-eyebrow::before {
-  content: '';
-  display: inline-block;
-  width: 24px;
-  height: 1px;
-  background: var(--green);
-}
-
-.sponsor-heading {
-  font-family: 'Playfair Display', serif;
-  font-size: 28px;
-  font-weight: 700;
-  color: white;
-  line-height: 1.2;
-  margin-bottom: 14px;
-}
-
-.sponsor-body {
-  font-size: 14px;
-  color: rgba(255,255,255,0.5);
-  line-height: 1.75;
-  margin-bottom: 22px;
-}
-
-.sponsor-pills {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.sponsor-pill {
-  font-size: 11px;
-  font-weight: 600;
-  padding: 4px 12px;
-  border-radius: 3px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  background: rgba(154,187,80,0.12);
-  border: 1px solid rgba(154,187,80,0.25);
-  color: var(--green);
-}
-
-.sponsor-vert-divider {
-  width: 1px;
-  height: 200px;
-  background: rgba(255,255,255,0.1);
-}
-
-.sponsor-logo-block {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-.sponsor-logo-block img {
-  height: 110px;
-  width: auto;
-  object-fit: contain;
-  opacity: 0.95;
-  transition: opacity 0.2s;
-  border-radius: 8px;
-}
-
-.sponsor-logo-block img:hover { opacity: 1; }
-
-.sponsor-tagline {
-  font-size: 11px;
-  color: rgba(255,255,255,0.35);
-  text-align: center;
-  letter-spacing: 0.5px;
-  line-height: 1.5;
-}
-
-.sponsor-links-line {
-  font-size: 12px;
-  color: rgba(255,255,255,0.7);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 2px;
-}
-
-.sponsor-links-line a {
-  color: rgba(255,255,255,0.72);
-  text-decoration: none;
-  transition: color 0.15s ease;
-}
-
-.sponsor-links-line a:hover {
-  color: var(--green);
-}
-
-.sponsor-stats-block {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.sponsor-stat {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 8px;
-  padding: 18px 16px;
-  text-align: center;
-}
-
-.sponsor-stat-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 26px;
-  font-weight: 700;
-  color: var(--yellow);
-  display: block;
-  line-height: 1;
-  margin-bottom: 6px;
-}
-
-.sponsor-stat-lbl {
-  font-size: 10.5px;
-  color: rgba(255,255,255,0.4);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 500;
-}
-
-.sponsor-clients {
-  margin-top: 24px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(255,255,255,0.08);
-}
-
-.sponsor-clients-label {
-  font-size: 9px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: rgba(255,255,255,0.3);
-  margin-bottom: 12px;
-}
-
-.sponsor-clients-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.sponsor-clients-list span {
-  font-size: 11.5px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.55);
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.1);
-  padding: 4px 12px;
-  border-radius: 3px;
-  letter-spacing: 0.3px;
-}
-
 /* ── FOOTER ── */
 footer {
   background: var(--navy-dark);
-  color: rgba(255,255,255,0.45);
-  padding: 32px 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  color: rgba(255,255,255,0.5);
+  padding: 24px 40px 28px;
+  border-top: 3px solid var(--green);
   font-size: 12px;
   font-weight: 400;
-  border-top: 3px solid var(--green);
 }
 
-footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px 28px;
+}
+
+.footer-identity {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  line-height: 0;
+  flex-shrink: 0;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 4px;
+  margin: -4px;
+  transition: background 0.15s ease, opacity 0.15s ease;
+}
+
+.footer-brand:hover {
+  background: rgba(255,255,255,0.06);
+  opacity: 0.95;
+}
+
+.footer-brand:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+.footer-identity-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.footer-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.92);
+  line-height: 1.25;
+}
+
+.footer-credit {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.02em;
+  line-height: 1.35;
+}
+
+.footer-social {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.footer-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  color: rgba(255,255,255,0.55);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.footer-social-link:hover {
+  color: var(--green);
+  background: rgba(154,187,80,0.1);
+  border-color: rgba(154,187,80,0.25);
+}
+
+.footer-social-link svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
 
 .footer-links {
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
 }
 
 .footer-links a {
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.42);
   text-decoration: none;
   font-size: 11.5px;
   font-weight: 500;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.2px;
   transition: color 0.15s;
 }
 
-.footer-links a:hover { color: rgba(255,255,255,0.8); }
+.footer-links a:hover {
+  color: rgba(255,255,255,0.85);
+}
+
+@media (max-width: 720px) {
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .footer-social {
+    order: 4;
+  }
+}
 
 /* ── ANIMATIONS ── */
 @keyframes fadeUp {
@@ -2216,19 +2203,25 @@ footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
 <!-- TOPBAR -->
 <div class="topbar">
   <div class="logo-dropdown" id="logoDropdown">
-    <button class="logo" id="logoDropdownToggle" type="button" aria-expanded="false">
-      <div class="logo-mark" aria-hidden="true">
-        <span class="logo-cross-v"></span>
-        <span class="logo-cross-h"></span>
-        <span class="logo-letter logo-letter-t">T</span>
-        <span class="logo-letter logo-letter-s">S</span>
+    <div class="logo-bar">
+      <div class="logo-lockup">
+        <div class="logo-mark">
+          <span class="logo-cross-v"></span>
+          <span class="logo-cross-h"></span>
+          <span class="logo-letter logo-letter-t">T</span>
+          <span class="logo-letter logo-letter-s">S</span>
+        </div>
+        <div class="logo-text">
+          <span class="logo-title">Dictámenes oficiales / Perú ETS</span>
+          <span class="logo-subtitle">Tecnologías & Salud</span>
+        </div>
       </div>
-      <div class="logo-text">
-        <span class="logo-title">Dictámenes oficiales / Perú ETS</span>
-        <span class="logo-subtitle">Tecnologías & Salud</span>
-      </div>
-    </button>
-    <div class="logo-menu">
+      <button class="logo-region-toggle" id="logoDropdownToggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="logoRegionMenu">
+        <span>Regiones</span>
+        <span class="logo-region-caret" aria-hidden="true">▾</span>
+      </button>
+    </div>
+    <div class="logo-menu" id="logoRegionMenu" role="menu">
       <div class="logo-menu-title">Región</div>
       <button class="logo-menu-item active" type="button" data-region="Perú">Perú</button>
       <button class="logo-menu-item" type="button" data-region="Chile">Chile</button>
@@ -2238,13 +2231,13 @@ footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
   </div>
   <nav class="topnav">
     <div class="nav-dropdown" id="navDropdown">
-      <button type="button" id="navDropdownToggle" aria-expanded="false">Tipo de evaluación ▾</button>
+      <button type="button" id="navDropdownToggle" aria-expanded="false">Por tipo de evaluación ▾</button>
       <div class="nav-dropdown-menu">
-        <div class="nav-dropdown-title">Tipo de evaluación</div>
-        <a class="nav-dropdown-item" href="#">Evaluación multicriterio de tecnologías sanitarias</a>
-        <a class="nav-dropdown-item" href="#">Metodología GRADE adaptada al Perú</a>
-        <a class="nav-dropdown-item" href="#">Evaluación económica</a>
-        <a class="nav-dropdown-item" href="#">Guía de práctica clínica</a>
+        <div class="nav-dropdown-title">Por tipo de evaluación</div>
+        <a class="nav-dropdown-item" href="#">Evaluaciones de tecnologías sanitarias</a>
+        <a class="nav-dropdown-item" href="#">Informes de valor terapéutico</a>
+        <a class="nav-dropdown-item" href="#">Evaluaciones económicas</a>
+        <a class="nav-dropdown-item" href="#">Guías de práctica clínica</a>
       </div>
     </div>
     <a href="#">Por Patología</a>
@@ -2263,27 +2256,26 @@ footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
         <ul class="norm-tree">
           <li class="open">
             <button type="button" class="menu-group-toggle">
-              <span class="menu-group-title">Ley principal de compra</span>
+              <span class="menu-group-title">Ley nacional de cáncer</span>
               <span class="menu-group-caret">▸</span>
             </button>
             <ul class="norm-sublist">
-              <li><a class="menu-subitem" href="#">Reglamento</a></li>
-              <li><a class="menu-subitem" href="#">Actualización</a></li>
-            </ul>
-          </li>
-          <li>
-            <button type="button" class="menu-group-toggle">
-              <span class="menu-group-title">Ley de evaluación sanitaria y clasificación</span>
-              <span class="menu-group-caret">▸</span>
-            </button>
-            <ul class="norm-sublist">
-              <li><a class="menu-subitem" href="#">Decreto 028</a></li>
               <li><a class="menu-subitem" href="#">Reglamento</a></li>
             </ul>
           </li>
           <li>
             <button type="button" class="menu-group-toggle">
-              <span class="menu-group-title">Normativa internacional</span>
+              <span class="menu-group-title">Ley de Enfermedades raras y huérfanas</span>
+              <span class="menu-group-caret">▸</span>
+            </button>
+            <ul class="norm-sublist">
+              <li><a class="menu-subitem" href="#">Listado ERH</a></li>
+              <li><a class="menu-subitem" href="#">Reglamento</a></li>
+            </ul>
+          </li>
+          <li>
+            <button type="button" class="menu-group-toggle">
+              <span class="menu-group-title">Manuales metodológicos</span>
               <span class="menu-group-caret">▸</span>
             </button>
             <ul class="norm-sublist">
@@ -2298,17 +2290,18 @@ footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
     <div class="nav-dropdown nav-dropdown-faq">
       <button type="button">Preguntas frecuentes ▾</button>
       <div class="nav-dropdown-menu faq-menu">
-        <div class="nav-dropdown-title">Preguntas frecuentes</div>
+        <div class="nav-dropdown-title">Preguntas frecuentes:</div>
         <a class="nav-dropdown-item" href="#">¿Qué es una ETS?</a>
-        <a class="nav-dropdown-item" href="#">¿Qué instituciones evalúan tecnologías en Perú?</a>
-        <a class="nav-dropdown-item" href="#">¿Qué significa un resultado favorable?</a>
-        <a class="nav-dropdown-item" href="#">¿Qué es IETSI y qué es INS-CETS?</a>
-        <a class="nav-dropdown-item" href="#">¿Qué incluye la metodología GRADE?</a>
-        <a class="nav-dropdown-item" href="#">¿Cómo se interpreta un análisis de costo-efectividad?</a>
-        <a class="nav-dropdown-item" href="#">¿Qué es una pregunta PICO?</a>
-        <a class="nav-dropdown-item" href="#">¿Cómo buscar por patología o molécula?</a>
-        <a class="nav-dropdown-item" href="#">¿Qué diferencia hay entre ETS-EMC y ETS-C?</a>
-        <a class="nav-dropdown-item" href="#">¿Cómo descargar o citar un resultado oficial?</a>
+        <a class="nav-dropdown-item" href="#">¿Qué es una ETS-Multicriterio?</a>
+        <a class="nav-dropdown-item" href="#">¿Qué tipos de estudios se suelen evaluar en una ETS?</a>
+        <a class="nav-dropdown-item" href="#">¿Qué es una PICO?</a>
+        <a class="nav-dropdown-item" href="#">¿Qué es la Metodología GRADE?</a>
+        <a class="nav-dropdown-item" href="#">¿Qué es un desenlace crítico?</a>
+        <a class="nav-dropdown-item" href="#">¿Qué es el Riesgo de Sesgo?</a>
+        <a class="nav-dropdown-item" href="#">¿Qué es una diferencia mínima importante?</a>
+        <a class="nav-dropdown-item" href="#">¿A qué llamamos valor terapéutico?</a>
+        <a class="nav-dropdown-item" href="#">¿Cómo se evalúa el valor económico?</a>
+        <a class="nav-dropdown-item" href="#">¿Qué criterios se consideran en el valor social?</a>
       </div>
     </div>
     <div class="nav-divider"></div>
@@ -2344,11 +2337,9 @@ footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
     <div class="filters-body">
       <div class="filters-grid">
         <div class="filter-chip">Rango de fecha de publicación</div>
-        <div class="filter-chip">Tipo de estudio detallado</div>
-        <div class="filter-chip">Institución y región</div>
+        <div class="filter-chip">Tipo de estudio</div>
+        <div class="filter-chip">País</div>
         <div class="filter-chip">Estado regulatorio</div>
-        <div class="filter-chip">Población / severidad</div>
-        <div class="filter-chip">Desenlaces críticos (PICO)</div>
       </div>
       <div class="filters-actions">
         <button class="btn-secondary" onclick="closeFiltersPopup()">Cerrar</button>
@@ -2365,15 +2356,17 @@ footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
     <div class="hero-tag">
       ETS-EMC &nbsp;|&nbsp; TS INNOVADORAS &nbsp;|&nbsp; GRADE FRAMEWORK &nbsp;|&nbsp; COSTO-EFECTIVIDAD
     </div>
-    <div class="hero-logo-down" role="img" aria-label="Tecnologías & Salud">
-      <div class="logo-mark" aria-hidden="true">
-        <span class="logo-cross-v"></span>
-        <span class="logo-cross-h"></span>
-        <span class="logo-letter logo-letter-t">T</span>
-        <span class="logo-letter logo-letter-s">S</span>
+    <div class="hero-brand-row">
+      <div class="hero-logo-side" role="img" aria-label="T&S — Tecnologías y Salud">
+        <div class="logo-mark" aria-hidden="true">
+          <span class="logo-cross-v"></span>
+          <span class="logo-cross-h"></span>
+          <span class="logo-letter logo-letter-t">T</span>
+          <span class="logo-letter logo-letter-s">S</span>
+        </div>
       </div>
-      <div class="logo-text">
-        <span class="logo-subtitle">Tecnologías & Salud</span>
+      <div class="hero-title-side">
+        <span class="hero-main-title">Tecnologías <span class="hero-main-title-amp">&amp;</span> Salud</span>
       </div>
     </div>
     <div class="hero-subtitle">Observatorio multinacional de documentos técnicos para la toma de decisiones en salud</div>
@@ -2382,7 +2375,7 @@ footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
     <div class="search-wrap">
       <div class="search-box">
         <span class="search-icon">⌕</span>
-        <input type="text" id="searchInput" placeholder="Ej: Paracetamol (Panadol, Tylenol) · Ibuprofeno (Advil, Motrin)..." oninput="filterCards()">
+        <input type="text" id="searchInput" placeholder="Principio activo, nombre comercial (Imbruvica) o laboratorio (Janssen). Varias palabras: imbruvica janssen…" oninput="filterCards()">
         <div class="search-actions">
           <button class="search-btn" onclick="filterCards()">Buscar</button>
           <button class="filters-btn" onclick="openFilters()">Filtros</button>
@@ -2560,7 +2553,7 @@ footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
     <div class="detail-header">
       <div class="detail-close">
         <div style="display:flex; gap:8px; align-items:center;">
-          <span id="detailBadge" class="dictamen-badge fav">● Favorable</span>
+          <span id="detailBadge" class="dictamen-badge fav">Favorable</span>
         </div>
         <button class="close-btn" onclick="closeDetailPanel()">✕</button>
       </div>
@@ -2571,7 +2564,6 @@ footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
     <div class="detail-body">
 
       <div class="dictamen-box fav" id="detailDictamenBox">
-        <div class="dictamen-icon">✅</div>
         <div class="dictamen-text">
           <strong id="detailDictamenTitle">Resultado Favorable</strong>
           <span id="detailDictamenSub">Recomendado para cobertura bajo la indicación evaluada</span>
@@ -2627,15 +2619,15 @@ footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
       </div>
 
       <div class="detail-section">
-        <div class="detail-section-title">Resumen estructurado</div>
+        <div class="detail-section-title">Resumen</div>
         <div class="summary-text" id="detailSummary">
           La evidencia disponible muestra que ibrutinib mejora significativamente la supervivencia libre de progresión (SLP) en comparación con las opciones de quimioterapia convencional.
         </div>
       </div>
 
       <div class="detail-actions">
-        <a href="#" class="btn-primary">📄 Ver documento completo</a>
-        <button class="btn-secondary">🔗 Fuente oficial</button>
+        <button type="button" class="btn-secondary" onclick="toggleSummaryMore(this)">Ver más</button>
+        <a class="btn-primary" href="https://www.gob.pe/institucion/ins/informes-publicaciones/6830745-ets-emc-n-009-2025-renetsa-acalabrutinib-para-el-tratamiento-de-adultos-con-leucemia-linfocitica-cronica-recidivante-o-recurrente-no-aptos-para-quimioinmunoterapia-de-rescate-y-con-intolerancia-a-ibrutinib" target="_blank" rel="noopener noreferrer">🔗 Fuente oficial</a>
       </div>
 
     </div>
@@ -2643,37 +2635,38 @@ footer strong { color: rgba(255,255,255,0.8); font-weight: 600; }
 </div>
 
 
-<!-- SPONSOR SECTION -->
-<section class="sponsor-section">
-  <div class="sponsor-inner simple">
-    <div class="sponsor-eyebrow" style="margin-bottom:2px;">Auspiciador oficial</div>
-    <div class="sponsor-logo-block">
-      <img src="tts-logo.png" alt="Tecnologías & Salud" />
-      <div class="sponsor-tagline">
-        Tecnologías &amp; Salud<br>
-        Miraflores, Lima - Perú<br>
-        <a href="https://tecnologias-salud.org" target="_blank">tecnologias-salud.org</a>
-      </div>
-      <div class="sponsor-links-line">
-        <span>Redes:</span>
-        <a href="#" target="_blank">LinkedIn</a>
-        <span>•</span>
-        <a href="#" target="_blank">Instagram</a>
-        <span>•</span>
-        <a href="#" target="_blank">Facebook</a>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- FOOTER -->
 <footer>
-  <p>© 2025 <strong>Repositorio Peruano de ETS</strong> · Basado en documentos públicos de RENETSA, IETSI y INS-CETS · Solo referencia informativa</p>
-  <div class="footer-links">
-    <a href="#">Aviso legal</a>
-    <a href="#">Política de privacidad</a>
-    <a href="#">Contacto</a>
-    <a href="#">Acerca de</a>
+  <div class="footer-inner">
+    <div class="footer-identity">
+      <a href="https://tecnologias-salud.org" class="footer-brand" target="_blank" rel="noopener noreferrer" aria-label="Tecnologías y Salud — sitio web">
+        <div class="logo-mark" aria-hidden="true">
+          <span class="logo-cross-v"></span>
+          <span class="logo-cross-h"></span>
+          <span class="logo-letter logo-letter-t">T</span>
+          <span class="logo-letter logo-letter-s">S</span>
+        </div>
+      </a>
+      <div class="footer-identity-text">
+        <span class="footer-name">Tecnologías y Salud</span>
+        <p class="footer-credit">Desarrollado por Tecnologías y Salud</p>
+      </div>
+    </div>
+    <div class="footer-social" role="navigation" aria-label="Redes sociales">
+      <a class="footer-social-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <a class="footer-social-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      </a>
+      <a class="footer-social-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </a>
+    </div>
+    <nav class="footer-links" aria-label="Pie de página">
+      <a href="#">Contacto</a>
+      <a href="#">Aviso legal</a>
+    </nav>
   </div>
 </footer>
 
@@ -2709,6 +2702,60 @@ const predictiveDrugs = [
 let activeFilters = { inst: 'todas', tipo: 'todas', cat: 'todas', sub: 'todas', year: 'todas', dictamen: [] };
 let searchTerm = '';
 
+/** Normaliza texto para búsqueda: minúsculas, sin tildes, sin ®/· que rompan coincidencias parciales */
+function normalizeForSearch(s) {
+  if (s == null || s === '') return '';
+  return String(s)
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[®™]/g, '')
+    .replace(/[·•|]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function queryTokens(query) {
+  return normalizeForSearch(query).split(/\s+/).filter(Boolean);
+}
+
+/** Texto indexable por registro: principio activo, comercial, trozos de comercial (marca / lab), PICO, etc. */
+function buildRecordSearchBlob(d) {
+  const commercialParts = (d.commercial || '').split(/[·•|]/).map((x) => normalizeForSearch(x.trim())).filter(Boolean);
+  const chunks = [
+    d.drug,
+    d.commercial,
+    d.indication,
+    d.cat,
+    d.sub || '',
+    d.inst,
+    d.system,
+    d.dictamen,
+    d.tipo,
+    d.P,
+    d.I,
+    d.C,
+    d.O,
+    d.summary,
+    ...commercialParts
+  ];
+  return normalizeForSearch(chunks.filter(Boolean).join(' '));
+}
+
+function recordMatchesQuery(d, query) {
+  const tokens = queryTokens(query);
+  if (tokens.length === 0) return true;
+  const blob = buildRecordSearchBlob(d);
+  return tokens.every((t) => blob.includes(t));
+}
+
+function curatedRecordMatchesQuery(d, query) {
+  const tokens = queryTokens(query);
+  if (tokens.length === 0) return true;
+  const blob = normalizeForSearch(`${d.generic} ${d.commercial}`);
+  return tokens.every((t) => blob.includes(t));
+}
+
 function renderCards(data) {
   const list = document.getElementById('etsList');
   list.innerHTML = '';
@@ -2718,7 +2765,7 @@ function renderCards(data) {
   }
   data.forEach((d, i) => {
     const dictClass = d.dictamen === 'favorable' ? 'fav' : d.dictamen === 'no favorable' ? 'nofav' : 'cond';
-    const dictLabel = d.dictamen === 'favorable' ? '✓ Favorable' : d.dictamen === 'no favorable' ? '✗ No favorable' : '≈ Condicionado';
+    const dictLabel = d.dictamen === 'favorable' ? 'Favorable' : d.dictamen === 'no favorable' ? 'No favorable' : 'Condicionado';
     const instClass = d.system === 'EsSalud' ? 'tag-essalud' : 'tag-inst';
     const card = document.createElement('div');
     card.className = 'ets-card';
@@ -2750,16 +2797,9 @@ function renderCards(data) {
 }
 
 function filterCards() {
-  searchTerm = document.getElementById('searchInput').value.toLowerCase();
+  searchTerm = document.getElementById('searchInput').value.trim();
   let result = etsData.filter(d => {
-    const matchSearch = !searchTerm ||
-      d.drug.toLowerCase().includes(searchTerm) ||
-      d.commercial.toLowerCase().includes(searchTerm) ||
-      d.indication.toLowerCase().includes(searchTerm) ||
-      d.cat.toLowerCase().includes(searchTerm) ||
-      (d.sub && d.sub.toLowerCase().includes(searchTerm)) ||
-      d.inst.toLowerCase().includes(searchTerm) ||
-      d.dictamen.toLowerCase().includes(searchTerm);
+    const matchSearch = recordMatchesQuery(d, searchTerm);
     const matchInst = activeFilters.inst === 'todas' || d.inst === activeFilters.inst;
     const matchTipo = activeFilters.tipo === 'todas' || d.tipo === activeFilters.tipo;
     const matchCat = activeFilters.cat === 'todas' || d.cat === activeFilters.cat;
@@ -2815,22 +2855,16 @@ function renderSearchSuggestions() {
   const box = document.getElementById('searchSuggestions');
   if (!input || !box) return;
 
-  const term = input.value.trim().toLowerCase();
+  const term = input.value.trim();
   if (!term) {
     box.classList.remove('open');
     box.innerHTML = '';
     return;
   }
 
-  const curatedMatches = predictiveDrugs.filter((d) =>
-    d.generic.toLowerCase().includes(term) ||
-    d.commercial.toLowerCase().includes(term)
-  ).slice(0, 6);
+  const curatedMatches = predictiveDrugs.filter((d) => curatedRecordMatchesQuery(d, term)).slice(0, 6);
 
-  const etsMatches = etsData.filter((d) =>
-    d.drug.toLowerCase().includes(term) ||
-    d.commercial.toLowerCase().includes(term)
-  ).slice(0, 6);
+  const etsMatches = etsData.filter((d) => recordMatchesQuery(d, term)).slice(0, 6);
 
   const seen = new Set(curatedMatches.map((d) => d.generic.toLowerCase()));
   const merged = [
@@ -2901,17 +2935,19 @@ function closePremiumNotice(event) {
 // ── DETAIL PANEL ──
 function openDetail(d) {
   const dictClass = d.dictamen === 'favorable' ? 'fav' : d.dictamen === 'no favorable' ? 'nofav' : 'cond';
-  const dictLabel = d.dictamen === 'favorable' ? '● Favorable' : d.dictamen === 'no favorable' ? '● No favorable' : '● Condicionado';
-  const dictIcon = d.dictamen === 'favorable' ? '✅' : d.dictamen === 'no favorable' ? '❌' : '⚠️';
+  const dictLabel = d.dictamen === 'favorable' ? 'Favorable' : d.dictamen === 'no favorable' ? 'No favorable' : 'Condicionado';
   const dictTitle = d.dictamen === 'favorable' ? 'Resultado Favorable' : d.dictamen === 'no favorable' ? 'Resultado No Favorable' : 'Resultado Condicionado';
-  const dictSub = d.dictamen === 'favorable' ? 'Recomendado para cobertura bajo la indicación evaluada' : d.dictamen === 'no favorable' ? 'No se recomienda cobertura en la indicación evaluada' : 'Cobertura recomendada bajo condiciones específicas';
+  const dictSub = d.dictamen === 'favorable'
+    ? 'Recomendado para cobertura en la indicación evaluada.'
+    : d.dictamen === 'no favorable'
+      ? 'No se recomienda cobertura en la indicación evaluada.'
+      : 'Cobertura bajo condiciones específicas o mecanismos diferenciados de adquisición (MDA).';
 
   document.getElementById('detailDrug').textContent = d.drug;
   document.getElementById('detailCommercial').textContent = d.commercial;
   document.getElementById('detailBadge').className = `dictamen-badge ${dictClass}`;
   document.getElementById('detailBadge').textContent = dictLabel;
   document.getElementById('detailDictamenBox').className = `dictamen-box ${dictClass}`;
-  document.getElementById('detailDictamenBox').querySelector('.dictamen-icon').textContent = dictIcon;
   document.getElementById('detailDictamenTitle').textContent = dictTitle;
   document.getElementById('detailDictamenSub').textContent = dictSub;
   document.getElementById('detailInst').textContent = `${d.inst} – ${d.system}`;
@@ -2931,28 +2967,38 @@ function openDetail(d) {
 }
 
 function buildStructuredSummary(d, dictTitle) {
-  const tipoNota =
-    d.tipo === 'ETS-EMC'
-      ? 'Este formato corresponde a ETS-EMC.'
-      : d.tipo === 'GPC'
-        ? 'Este formato corresponde a GPC y prioriza recomendaciones clínicas.'
-        : 'Este formato corresponde a evaluación económica/costo-efectividad.';
-
   return `
-    <div class="summary-title">Resumen ejecutivo</div>
-    <p><strong>Resumen:</strong> ${d.summary}</p>
-    <p><strong>Resultado:</strong> ${dictTitle}.</p>
-    <p><strong>Seguridad y eficacia:</strong> evaluación de desenlaces críticos (P, I, C, O), magnitud del beneficio, riesgos y certeza de evidencia.</p>
-    <p><strong>Criterios de valor social:</strong></p>
-    <ul class="summary-list">
-      <li>Necesidad no satisfecha del sistema y de los pacientes.</li>
-      <li>Valor de innovación incremental frente a alternativas.</li>
-      <li>Equidad y acceso oportuno para la población objetivo.</li>
-      <li>Uso de recursos y sostenibilidad presupuestal.</li>
-    </ul>
-    <p><strong>Voto razonado:</strong> se detallan fundamentos a favor y en contra en la deliberación final.</p>
-    <p><strong>Tipo de estudio:</strong> ${d.tipo}. ${tipoNota}</p>
+    <div class="summary-title">Resumen</div>
+    <p>${d.summary}</p>
+    <div class="summary-more">
+      <p><strong>Eficacia:</strong> Medida de efecto (HR, RR, OR), IC95%, certeza de evidencia. Tamano de efecto. Si el desenlace es continuo (DM, SMD e IC95%).</p>
+      <p><strong>Seguridad:</strong> Medida de efecto (HR, RR, OR), IC95%, certeza de evidencia. Tamano de efecto.</p>
+      <p><strong>Certeza de evidencia global:</strong></p>
+      <p><strong>Motivos principales de penalizacion de la certeza de evidencia:</strong></p>
+      <p><strong>Valor social:</strong></p>
+      <ul class="summary-list">
+        <li><strong>Necesidad no cubierta:</strong> sintetiza los hallazgos en este criterio.</li>
+        <li><strong>Nivel de innovacion:</strong> sintetiza los hallazgos en este criterio.</li>
+        <li><strong>Equidad:</strong> sintetiza los hallazgos en este criterio.</li>
+      </ul>
+      <p><strong>Valor economico</strong></p>
+      <ul class="summary-list">
+        <li><strong>Uso de recursos:</strong> sintetiza los hallazgos en este criterio.</li>
+        <li><strong>Costo-Efectividad:</strong> sintetiza los hallazgos en este criterio.</li>
+      </ul>
+    </div>
   `;
+}
+
+function toggleSummaryMore(button) {
+  if (!button) return;
+  const detailBody = button.closest('.detail-body');
+  if (!detailBody) return;
+  const container = detailBody.querySelector('#detailSummary .summary-more');
+  if (!container) return;
+  const willOpen = !container.classList.contains('open');
+  container.classList.toggle('open', willOpen);
+  button.textContent = willOpen ? 'Ver menos' : 'Ver más';
 }
 
 function closeDetailPanel() {
