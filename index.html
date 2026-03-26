@@ -76,11 +76,11 @@ body {
 .logo-lockup {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   gap: 2px;
-  min-width: 130px;
-  padding: 4px 4px 4px 0;
+  min-width: 0;
+  padding: 4px 8px 4px 0;
   user-select: none;
 }
 
@@ -120,87 +120,24 @@ body {
   transform: rotate(180deg);
 }
 
-.logo-mark {
-  width: 56px;
-  height: 39px;
-  position: relative;
+.logo-img {
+  display: block;
+  width: auto;
+  height: 44px;
+  max-width: 180px;
+  object-fit: contain;
   flex-shrink: 0;
-  background: transparent;
 }
 
-.logo-cross-v,
-.logo-cross-h {
-  position: absolute;
-  background: var(--green);
-  border-radius: 2px;
+.topbar .logo-img {
+  height: clamp(52px, 6.5vw, 64px);
+  max-width: min(300px, 52vw);
 }
 
-.logo-cross-v {
-  width: 11px;
-  height: 41px;
-  left: 22px;
-  top: -2px;
+.logo-img--hero {
+  height: 96px;
+  max-width: 220px;
 }
-
-.logo-cross-h {
-  width: 33px;
-  height: 9px;
-  left: 9px;
-  top: 13px;
-  background: #a8c36a;
-}
-
-.logo-letter {
-  position: absolute;
-  font-family: 'Inter', sans-serif;
-  font-weight: 800;
-  color: #ffffff;
-  line-height: 1;
-  letter-spacing: -0.02em;
-  text-shadow: 0 0 0 rgba(0,0,0,0);
-}
-
-.logo-letter-t {
-  font-size: 42px;
-  left: 0;
-  top: -4px;
-}
-
-.logo-letter-s {
-  font-size: 42px;
-  left: 26px;
-  top: -4px;
-}
-
-.logo-text {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  gap: 0;
-  line-height: 1.15;
-}
-
-.logo-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 12px;
-  font-weight: 700;
-  color: white;
-  letter-spacing: 0.1px;
-  display: none;
-}
-
-.logo-subtitle {
-  font-size: 8.5px;
-  font-weight: 500;
-  color: rgba(255,255,255,0.72);
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  text-align: center;
-  white-space: nowrap;
-}
-
 
 .logo-dropdown {
   position: relative;
@@ -798,34 +735,6 @@ body {
 .hero-logo-side {
   flex-shrink: 0;
 }
-
-.hero-logo-side .logo-mark {
-  width: 140px;
-  height: 96px;
-}
-
-.hero-logo-side .logo-cross-v {
-  width: 24px;
-  height: 100px;
-  left: 56px;
-  top: -4px;
-}
-
-.hero-logo-side .logo-cross-h {
-  width: 80px;
-  height: 18px;
-  left: 28px;
-  top: 32px;
-}
-
-.hero-logo-side .logo-letter-t,
-.hero-logo-side .logo-letter-s {
-  font-size: 98px;
-  top: -10px;
-}
-
-.hero-logo-side .logo-letter-t { left: 0; }
-.hero-logo-side .logo-letter-s { left: 62px; }
 
 .hero-title-side {
   flex: 0 1 auto;
@@ -2205,16 +2114,7 @@ footer {
   <div class="logo-dropdown" id="logoDropdown">
     <div class="logo-bar">
       <div class="logo-lockup">
-        <div class="logo-mark">
-          <span class="logo-cross-v"></span>
-          <span class="logo-cross-h"></span>
-          <span class="logo-letter logo-letter-t">T</span>
-          <span class="logo-letter logo-letter-s">S</span>
-        </div>
-        <div class="logo-text">
-          <span class="logo-title">Dictámenes oficiales / Perú ETS</span>
-          <span class="logo-subtitle">Tecnologías & Salud</span>
-        </div>
+        <img src="tss-logo-white.png" alt="Tecnologías y Salud" class="logo-img" width="280" height="64" decoding="async" />
       </div>
       <button class="logo-region-toggle" id="logoDropdownToggle" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="logoRegionMenu">
         <span>Regiones</span>
@@ -2358,12 +2258,7 @@ footer {
     </div>
     <div class="hero-brand-row">
       <div class="hero-logo-side" role="img" aria-label="T&S — Tecnologías y Salud">
-        <div class="logo-mark" aria-hidden="true">
-          <span class="logo-cross-v"></span>
-          <span class="logo-cross-h"></span>
-          <span class="logo-letter logo-letter-t">T</span>
-          <span class="logo-letter logo-letter-s">S</span>
-        </div>
+        <img src="tss-logo-white-cut.png" alt="" class="logo-img logo-img--hero" width="200" height="96" decoding="async" aria-hidden="true" />
       </div>
       <div class="hero-title-side">
         <span class="hero-main-title">Tecnologías <span class="hero-main-title-amp">&amp;</span> Salud</span>
@@ -2375,7 +2270,7 @@ footer {
     <div class="search-wrap">
       <div class="search-box">
         <span class="search-icon">⌕</span>
-        <input type="text" id="searchInput" placeholder="Principio activo, nombre comercial (Imbruvica) o laboratorio (Janssen)." oninput="filterCards()">
+        <input type="text" id="searchInput" placeholder="Principio activo, nombre comercial (Imbruvica) o laboratorio (Janssen). Varias palabras: imbruvica janssen…" oninput="filterCards()">
         <div class="search-actions">
           <button class="search-btn" onclick="filterCards()">Buscar</button>
           <button class="filters-btn" onclick="openFilters()">Filtros</button>
@@ -2640,12 +2535,7 @@ footer {
   <div class="footer-inner">
     <div class="footer-identity">
       <a href="https://tecnologias-salud.org" class="footer-brand" target="_blank" rel="noopener noreferrer" aria-label="Tecnologías y Salud — sitio web">
-        <div class="logo-mark" aria-hidden="true">
-          <span class="logo-cross-v"></span>
-          <span class="logo-cross-h"></span>
-          <span class="logo-letter logo-letter-t">T</span>
-          <span class="logo-letter logo-letter-s">S</span>
-        </div>
+        <img src="tss-logo-white.png" alt="" class="logo-img" width="180" height="44" decoding="async" aria-hidden="true" />
       </a>
       <div class="footer-identity-text">
         <span class="footer-name">Tecnologías y Salud</span>
